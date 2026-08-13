@@ -1,0 +1,10 @@
+{
+  "_cms": "CMS module: Analytics → National impact metrics. Set `value` to a real number once verified; while `value` is null the site displays the placeholder pattern (e.g. XX+) and never presents invented numbers as real.",
+  "items": [
+    { "id": "cities", "label": "Cities", "value": null, "placeholder": "XX", "suffix": "+" },
+    { "id": "institutions", "label": "Institutions", "value": null, "placeholder": "XX", "suffix": "+" },
+    { "id": "students", "label": "Students", "value": null, "placeholder": "XX,XXX", "suffix": "+" },
+    { "id": "ideas", "label": "Ideas", "value": null, "placeholder": "X,XXX", "suffix": "+" },
+    { "id": "mentors", "label": "Mentors", "value": null, "placeholder": "XXX", "suffix": "+" }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "_cms": "CMS module: Ecosystem → Locations / National Tour. These are the announced tour cities. Set venue once confirmed (null renders 'Venue to be announced'). Counts stay null until verified.",
+  "items": [
+    { "id": "jaipur", "sample": false, "city": "Jaipur", "state": "Rajasthan", "lon": 75.79, "lat": 26.91, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": ["campus-roadshow-jaipur"] },
+    { "id": "punjab", "sample": false, "city": "Punjab", "state": "Punjab", "lon": 76.0, "lat": 30.9, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "delhi-ncr", "sample": false, "city": "Delhi NCR", "state": "Delhi", "lon": 77.2, "lat": 28.6, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": ["campus-roadshow-delhi-ncr"] },
+    { "id": "pune", "sample": false, "city": "Pune", "state": "Maharashtra", "lon": 73.86, "lat": 18.52, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "bengaluru", "sample": false, "city": "Bengaluru", "state": "Karnataka", "lon": 77.59, "lat": 12.97, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": ["pitch-day-bengaluru"] },
+    { "id": "ahmedabad", "sample": false, "city": "Ahmedabad", "state": "Gujarat", "lon": 72.57, "lat": 23.02, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "chennai", "sample": false, "city": "Chennai", "state": "Tamil Nadu", "lon": 80.27, "lat": 13.08, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "hyderabad", "sample": false, "city": "Hyderabad", "state": "Telangana", "lon": 78.49, "lat": 17.38, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": ["ecosystem-forum-hyderabad"] },
+    { "id": "indore", "sample": false, "city": "Indore", "state": "Madhya Pradesh", "lon": 75.86, "lat": 22.72, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "kanpur", "sample": false, "city": "Kanpur", "state": "Uttar Pradesh", "lon": 80.35, "lat": 26.45, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "guwahati", "sample": false, "city": "Guwahati", "state": "Assam", "lon": 91.74, "lat": 26.14, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] },
+    { "id": "kolkata", "sample": false, "city": "Kolkata", "state": "West Bengal", "lon": 88.36, "lat": 22.57, "status": "active", "venue": null, "institutions": null, "participants": null, "ideas": null, "partners": null, "eventSlugs": [] }
+  ]
+}

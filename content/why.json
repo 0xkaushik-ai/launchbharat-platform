@@ -1,0 +1,11 @@
+{
+  "_cms": "CMS module: Website → Sections → Why LaunchBharat.",
+  "items": [
+    { "id": "discover", "title": "Discover", "text": "Identify India's emerging innovators wherever they are — metros, small towns and everywhere between.", "icon": "discover" },
+    { "id": "empower", "title": "Empower", "text": "Give young entrepreneurs access to the opportunities, knowledge and confidence to begin.", "icon": "empower" },
+    { "id": "connect", "title": "Connect", "text": "Bridge campuses with the wider startup ecosystem — founders, institutions and industry.", "icon": "connect" },
+    { "id": "mentor", "title": "Mentor", "text": "Create meaningful access to experienced professionals who have built before.", "icon": "mentor" },
+    { "id": "invest", "title": "Invest", "text": "Create pathways toward investors, funding ecosystems and the capital ideas need to grow.", "icon": "invest" },
+    { "id": "launch", "title": "Launch", "text": "Take promising ideas toward real-world impact on a national stage.", "icon": "launch" }
+  ]
+}

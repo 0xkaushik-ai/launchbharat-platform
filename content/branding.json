@@ -1,0 +1,20 @@
+{
+  "_cms": "CMS module: Branding → Official associations. Each association is independently manageable: add, edit, reorder (order), hide (placements), activate/deactivate (enabled), delete. RULES: enable an association ONLY after formal written approval; enter the EXACT approved wording; upload ONLY official logo assets supplied by the organization (logo: path under /public). Never use unofficial or recreated logos or seals.",
+  "associations": [
+    {
+      "id": "startup-india",
+      "organization": "Startup India",
+      "wording": "",
+      "attribution": "",
+      "logo": null,
+      "enabled": false,
+      "placements": ["hero", "footer", "trust"],
+      "order": 1,
+      "note": "PENDING — do not enable until the association is formally approved. Set `wording` to the exact approved phrase (e.g. as approved: 'Backed by Startup India' or 'In Association with Startup India') and upload the official logo asset."
+    }
+  ],
+  "genericSupportLine": {
+    "enabled": true,
+    "text": "Built with India's startup ecosystem — campuses, incubators, mentors, investors and industry."
+  }
+}

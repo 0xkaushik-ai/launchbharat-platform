@@ -1,0 +1,19 @@
+{
+  "_cms": "CMS module: Events → Grand Finale. dateConfirmed:false renders the date as tentative; set true once locked. Venue/city update here.",
+  "date": "2026-12-19T10:00:00+05:30",
+  "dateDisplay": "December 2026",
+  "dateConfirmed": false,
+  "venue": "National venue — to be announced",
+  "city": "New Delhi",
+  "registrationOpen": true,
+  "tagline": "From ideas to impact.",
+  "description": "The culmination of the LaunchBharat movement — bringing promising innovators, entrepreneurs, mentors, investors, institutions and industry leaders together on one national stage.",
+  "tracks": ["National finals", "Founder & investor summit", "Ecosystem exhibition", "Awards & recognition"],
+  "awards": [
+    { "title": "National Champion", "text": "The strongest idea on the national stage." },
+    { "title": "Emerging Innovator", "text": "The most promising first-time founder." },
+    { "title": "Campus of the Year", "text": "The institution that powered the movement." },
+    { "title": "Impact Award", "text": "The idea with the deepest social impact." }
+  ],
+  "speakersAnnounced": false
+}

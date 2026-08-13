@@ -1,0 +1,13 @@
+{
+  "_cms": "CMS module: Website → Sections → Who should join.",
+  "items": [
+    { "id": "students", "title": "Students", "text": "Explore entrepreneurship for the first time — no startup required, curiosity is enough." },
+    { "id": "student-founders", "title": "Student Founders", "text": "Sharpen your idea, find your first mentors and put your venture on a national track." },
+    { "id": "innovators", "title": "Innovators", "text": "Bring research, projects and inventions closer to the people who can help them scale." },
+    { "id": "startups", "title": "Startups", "text": "Access mentorship, visibility and pathways toward incubators and investors." },
+    { "id": "colleges", "title": "Colleges", "text": "Host the movement on campus and plug your students into the national ecosystem." },
+    { "id": "mentors", "title": "Mentors", "text": "Give the next generation what you wish you had — experience, honesty and direction." },
+    { "id": "investors", "title": "Investors", "text": "Meet high-intent, early founders and ideas before the rest of the market does." },
+    { "id": "industry", "title": "Industry", "text": "Partner with emerging talent, back real problems and shape the pipeline of innovation." }
+  ]
+}

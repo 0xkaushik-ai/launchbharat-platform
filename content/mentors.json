@@ -1,0 +1,13 @@
+{
+  "_cms": "CMS module: Ecosystem → Mentors. Profiles with announced:false render as 'to be announced' archetype cards — never invent real names. When a mentor is confirmed, set announced:true, fill name/designation/organization and upload photo (path under /public).",
+  "items": [
+    { "id": "m1", "announced": false, "name": "To be announced", "designation": "Founder", "organization": "Technology startup", "expertise": ["Zero to one", "Product"], "photo": null },
+    { "id": "m2", "announced": false, "name": "To be announced", "designation": "Investor", "organization": "Early-stage fund", "expertise": ["Fundraising", "Venture capital"], "photo": null },
+    { "id": "m3", "announced": false, "name": "To be announced", "designation": "Industry leader", "organization": "Enterprise", "expertise": ["Scale", "Partnerships"], "photo": null },
+    { "id": "m4", "announced": false, "name": "To be announced", "designation": "Mentor", "organization": "Startup ecosystem", "expertise": ["Go-to-market", "Strategy"], "photo": null },
+    { "id": "m5", "announced": false, "name": "To be announced", "designation": "Entrepreneur", "organization": "Consumer startup", "expertise": ["Brand", "Growth"], "photo": null },
+    { "id": "m6", "announced": false, "name": "To be announced", "designation": "Academic", "organization": "Institution", "expertise": ["Research", "Innovation"], "photo": null },
+    { "id": "m7", "announced": false, "name": "To be announced", "designation": "Ecosystem leader", "organization": "Incubator", "expertise": ["Incubation", "Acceleration"], "photo": null },
+    { "id": "m8", "announced": false, "name": "To be announced", "designation": "Operator", "organization": "Growth-stage startup", "expertise": ["Operations", "Hiring"], "photo": null }
+  ]
+}

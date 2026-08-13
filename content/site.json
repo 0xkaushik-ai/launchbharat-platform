@@ -1,0 +1,45 @@
+{
+  "_cms": "CMS module: Website → Site settings. Edit navigation, contact details and announcement bar here.",
+  "name": "LaunchBharat",
+  "legalName": "LaunchBharat Initiative",
+  "wordmark": { "primary": "LAUNCH", "secondary": "BHARAT" },
+  "tagline": "Discover. Empower. Connect. Launch.",
+  "taglineHi": "सपने लॉन्च करो। भविष्य बनाओ।",
+  "eyebrow": "A nationwide startup & innovation movement",
+  "headline": "India's next generation of entrepreneurs starts here.",
+  "description": "LaunchBharat connects students, ideas, institutions, mentors, investors and industry to create pathways for India's next generation of entrepreneurs to discover, develop and launch their ideas.",
+  "url": "https://launchbharat.in",
+  "contact": {
+    "email": "contact@launchbharat.in",
+    "phone": "+91 00000 00000",
+    "address": "National Coordination Office, New Delhi, India"
+  },
+  "social": [
+    { "label": "LinkedIn", "href": "https://www.linkedin.com" },
+    { "label": "X", "href": "https://x.com" },
+    { "label": "Instagram", "href": "https://www.instagram.com" },
+    { "label": "YouTube", "href": "https://www.youtube.com" }
+  ],
+  "nav": [
+    { "label": "About", "href": "/about" },
+    { "label": "The Movement", "href": "/movement" },
+    { "label": "Events", "href": "/events" },
+    { "label": "Tour", "href": "/tour" },
+    { "label": "Ecosystem", "href": "/ecosystem" },
+    { "label": "Grand Finale", "href": "/grand-finale" },
+    { "label": "Partners", "href": "/partners" },
+    { "label": "Media", "href": "/media" }
+  ],
+  "utilityNav": [
+    { "label": "Accessibility", "href": "/accessibility" },
+    { "label": "हिन्दी", "href": "/accessibility#language" },
+    { "label": "Media", "href": "/media" },
+    { "label": "Contact", "href": "/contact" },
+    { "label": "Sitemap", "href": "/sitemap.xml" }
+  ],
+  "announcement": {
+    "enabled": true,
+    "text": "Applications for the founding nationwide cohort are open.",
+    "href": "/register"
+  }
+}

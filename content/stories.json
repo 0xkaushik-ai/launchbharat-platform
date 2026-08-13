@@ -1,0 +1,35 @@
+{
+  "_cms": "CMS module: Website → Stories. These are aspirational journey archetypes describing the paths the movement is built to create — not testimonials from real participants. When real participant stories are approved, replace these and update the section caption in the component.",
+  "items": [
+    {
+      "id": "s1",
+      "persona": "The student in a tier-2 city",
+      "track": "First-time founder",
+      "stages": [
+        { "stage": "Before LaunchBharat", "quote": "I had an idea.", "text": "A real problem, noticed every day — and no idea who to even ask about it." },
+        { "stage": "The journey", "quote": "I found the ecosystem.", "text": "A campus roadshow, a mentor who asked hard questions, a bootcamp that turned a notion into a plan." },
+        { "stage": "The future", "quote": "I built something real.", "text": "A validated idea, a team, and a pathway that didn't exist before." }
+      ]
+    },
+    {
+      "id": "s2",
+      "persona": "The engineering team with a prototype",
+      "track": "Student startup",
+      "stages": [
+        { "stage": "Before LaunchBharat", "quote": "We built it at 2 AM.", "text": "A working prototype and no map from the lab bench to the market." },
+        { "stage": "The journey", "quote": "Someone had walked this road.", "text": "Founders and industry mentors who had shipped before showed where the road actually goes." },
+        { "stage": "The future", "quote": "Now it has users.", "text": "From demo to deployment — with an incubator pathway waiting." }
+      ]
+    },
+    {
+      "id": "s3",
+      "persona": "The innovator outside the metros",
+      "track": "Grassroots innovation",
+      "stages": [
+        { "stage": "Before LaunchBharat", "quote": "Opportunity felt far away.", "text": "Talent everywhere; access nowhere near it." },
+        { "stage": "The journey", "quote": "The ecosystem came to us.", "text": "The movement reached the campus instead of waiting for the campus to reach a metro." },
+        { "stage": "The future", "quote": "Distance stopped mattering.", "text": "A national stage that judges the idea, not the pincode." }
+      ]
+    }
+  ]
+}

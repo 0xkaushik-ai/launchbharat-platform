@@ -1,0 +1,11 @@
+{
+  "_cms": "CMS module: Website → Sections → Journey.",
+  "steps": [
+    { "id": "discover", "number": "01", "title": "Discover", "text": "Find promising ideas and emerging innovators across India's campuses and communities." },
+    { "id": "develop", "number": "02", "title": "Develop", "text": "Help participants strengthen their ideas through structured guidance and honest feedback." },
+    { "id": "connect", "number": "03", "title": "Connect", "text": "Bring students closer to mentors, founders and ecosystem leaders who have built before them." },
+    { "id": "validate", "number": "04", "title": "Validate", "text": "Expose ideas to industry and entrepreneurial perspectives that test what is real." },
+    { "id": "scale", "number": "05", "title": "Scale", "text": "Create pathways toward incubators, investors and the opportunities that follow." },
+    { "id": "launch", "number": "06", "title": "Launch", "text": "Take the strongest ideas toward the national stage — and into the world." }
+  ]
+}

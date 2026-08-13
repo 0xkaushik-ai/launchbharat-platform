@@ -1,0 +1,12 @@
+{
+  "_cms": "CMS module: Ecosystem → Partners. NEVER generate or recreate partner logos. Add a partner only after formal confirmation: { name, logo: '/partners/<file>.svg' (official asset), href }. Empty categories render as labelled open slots.",
+  "categories": [
+    { "id": "government", "category": "Government Initiatives", "description": "National and state initiatives supporting the movement.", "slots": 3, "partners": [] },
+    { "id": "institutions", "category": "Institutions", "description": "Universities and colleges hosting the movement on campus.", "slots": 6, "partners": [] },
+    { "id": "incubators", "category": "Incubators", "description": "Incubation partners receiving advancing teams.", "slots": 4, "partners": [] },
+    { "id": "accelerators", "category": "Accelerators", "description": "Acceleration programs for the strongest ideas.", "slots": 4, "partners": [] },
+    { "id": "investors", "category": "Investors", "description": "Funds and networks meeting the national cohort.", "slots": 4, "partners": [] },
+    { "id": "industry", "category": "Industry", "description": "Companies backing problems worth solving.", "slots": 6, "partners": [] },
+    { "id": "strategic", "category": "Strategic Partners", "description": "Media, community and knowledge partners.", "slots": 4, "partners": [] }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "_cms": "CMS module: Media. Items with sample:true are illustrative placeholders shown with a caption. Downloads with available:false render as 'coming soon'.",
+  "items": [
+    {
+      "id": "pr-001",
+      "sample": true,
+      "type": "press-release",
+      "title": "LaunchBharat announces a nationwide startup and innovation movement",
+      "date": "2026-08-01",
+      "excerpt": "A new national movement to discover, empower, connect and launch India's next generation of entrepreneurs — beginning on campuses across the country.",
+      "body": "LaunchBharat today announced a nationwide startup and innovation movement designed to bring India's startup ecosystem closer to the campus. The movement will discover promising students and ideas, help develop them through structured programs, connect participants with mentors and ecosystem stakeholders, and create pathways toward a national Grand Finale. Participation details and the event calendar are published at the movement's website."
+    },
+    {
+      "id": "an-001",
+      "sample": true,
+      "type": "announcement",
+      "title": "Applications open for the founding nationwide cohort",
+      "date": "2026-08-10",
+      "excerpt": "Students, student founders, innovators and early startups across India can now apply to join the movement's founding cohort.",
+      "body": "Applications are now open for LaunchBharat's founding cohort. Students, student founders, innovators and early-stage startups from any city in India are invited to apply. Applicants receive an application reference ID and updates as regional programs are announced."
+    },
+    {
+      "id": "nw-001",
+      "sample": true,
+      "type": "news",
+      "title": "Regional program calendar takes shape",
+      "date": "2026-08-11",
+      "excerpt": "Campus roadshows, bootcamps and regional pitch days are being scheduled with host institutions.",
+      "body": "LaunchBharat's regional calendar is taking shape, with campus roadshows, innovation bootcamps and regional pitch days being scheduled together with host institutions. Confirmed dates and venues are published on the Events page as they are finalized."
+    }
+  ],
+  "downloads": [
+    { "id": "dl-1", "title": "LaunchBharat Media Kit", "format": "PDF", "available": false },
+    { "id": "dl-2", "title": "Brand & Logo Guidelines", "format": "PDF", "available": false },
+    { "id": "dl-3", "title": "Movement Fact Sheet", "format": "PDF", "available": false }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "_cms": "CMS module: Website → FAQ.",
+  "items": [
+    { "q": "Who can participate in LaunchBharat?", "a": "Students, student founders, innovators and early-stage startups from any city in India — along with colleges, mentors, investors and industry partners who want to support them. You don't need a startup to begin; an idea, or even curiosity, is enough." },
+    { "q": "Does it cost anything to apply?", "a": "Applying to join the movement is free. Any program with a participation fee will state it clearly before you commit." },
+    { "q": "I don't have a startup yet. Can I still join?", "a": "Yes. LaunchBharat is designed for people at the very beginning — the journey starts with discovering and developing ideas, not with pitch decks." },
+    { "q": "How does my idea reach the Grand Finale?", "a": "Through the movement's journey: discover, develop, connect, validate, scale, launch. Participants advance through campus and regional programs; the strongest ideas are invited to the national stage." },
+    { "q": "How do colleges host LaunchBharat?", "a": "Institutions can apply to host roadshows, bootcamps and regional programs on campus. Write to us through the contact page and the partnerships team will follow up." },
+    { "q": "How are mentors and partners selected?", "a": "Mentors and partners are onboarded through verified, formal relationships. The website only displays associations that have been approved — nothing on this platform is fabricated credibility." }
+  ]
+}
