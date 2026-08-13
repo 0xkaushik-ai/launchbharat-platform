@@ -1,399 +1,247 @@
-import type { Metadata } from "next";
-import { Badge, Container, Eyebrow } from "@/components/ui";
-import {
-  getBranding,
-  getEvents,
-  getFaq,
-  getGrandFinale,
-  getJourney,
-  getLocations,
-  getMedia,
-  getMentors,
-  getPartners,
-  getSite,
-  getStats,
-  getStories,
-  getWho,
-  getWhy,
-} from "@/lib/content";
+"use client";
 
-export const metadata: Metadata = {
-  title: "CMS Console",
-  robots: { index: false, follow: false },
-};
+import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase-browser";
+import Link from "next/link";
 
-type ChipTone = "saffron" | "green" | "blue" | "neutral" | "gold";
+interface DashboardStats {
+  totalRegistrations: number;
+  pendingRegistrations: number;
+  approvedRegistrations: number;
+  rejectedRegistrations: number;
+  totalEvents: number;
+  totalTickets: number;
+  checkedIn: number;
+}
 
-interface ModuleCard {
+interface RecentRegistration {
   id: string;
-  name: string;
-  description: string;
-  sources: string[];
-  rows: { label: string; value: string }[];
-  chips: { text: string; tone: ChipTone }[];
+  ticket_id: string;
+  status: string;
+  created_at: string;
+  profiles: { full_name: string; email: string } | null;
 }
 
-function buildModules(): ModuleCard[] {
-  const site = getSite();
-  const branding = getBranding();
-  const stats = getStats();
-  const events = getEvents();
-  const grandFinale = getGrandFinale();
-  const locations = getLocations();
-  const mentors = getMentors();
-  const partners = getPartners();
-  const media = getMedia();
-  const faq = getFaq();
-  const journey = getJourney();
-  const why = getWhy();
-  const who = getWho();
-  const stories = getStories();
+export default function AdminDashboard() {
+  const [stats, setStats] = useState<DashboardStats>({
+    totalRegistrations: 0,
+    pendingRegistrations: 0,
+    approvedRegistrations: 0,
+    rejectedRegistrations: 0,
+    totalEvents: 0,
+    totalTickets: 0,
+    checkedIn: 0,
+  });
+  const [recent, setRecent] = useState<RecentRegistration[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const supabase = createClient();
 
-  const sampleEvents = events.filter((e) => e.sample).length;
-  const upcomingEvents = events.filter((e) => e.status === "upcoming").length;
-  const statPlaceholders = stats.filter((s) => s.value === null).length;
-  const sampleLocations = locations.filter((l) => l.sample).length;
-  const announcedMentors = mentors.filter((m) => m.announced).length;
-  const confirmedPartners = partners.reduce(
-    (sum, c) => sum + c.partners.length,
-    0,
-  );
-  const totalSlots = partners.reduce((sum, c) => sum + c.slots, 0);
-  const sampleMedia = media.items.filter((m) => m.sample).length;
-  const availableDownloads = media.downloads.filter(
-    (d) => d.available,
-  ).length;
+  useEffect(() => {
+    async function fetchStats() {
+      setLoading(true);
+      const [regsResult, eventsResult, ticketsResult, checkedInResult, recentResult] =
+        await Promise.all([
+          supabase.from("registrations").select("status"),
+          supabase.from("events").select("id", { count: "exact", head: true }),
+          supabase.from("event_tickets").select("id", { count: "exact", head: true }),
+          supabase
+            .from("event_tickets")
+            .select("id", { count: "exact", head: true })
+            .eq("status", "checked_in"),
+          supabase
+            .from("registrations")
+            .select("id, ticket_id, status, created_at, profiles!registrations_user_id_fkey(full_name, email)")
+            .order("created_at", { ascending: false })
+            .range((page - 1) * limit, page * limit - 1),
+        ]);
 
-  return [
-    {
-      id: "website",
-      name: "Website",
-      description:
-        "Site settings, navigation, announcement bar, homepage sections, FAQ and stories.",
-      sources: [
-        "content/site.json",
-        "content/journey.json",
-        "content/why.json",
-        "content/who.json",
-        "content/stories.json",
-        "content/faq.json",
-      ],
-      rows: [
-        { label: "Navigation", value: `${site.nav.length} primary items` },
-        {
-          label: "Announcement bar",
-          value: site.announcement.enabled ? "Enabled" : "Disabled",
-        },
-        {
-          label: "Sections",
-          value: `${journey.length} journey steps — ${why.length} pillars — ${who.length} audiences`,
-        },
-        { label: "FAQ", value: `${faq.length} questions` },
-        {
-          label: "Stories",
-          value: `${stories.length} archetypes (aspirational, not testimonials)`,
-        },
-      ],
-      chips: [
-        {
-          text: site.announcement.enabled
-            ? "Announcement live"
-            : "Announcement off",
-          tone: site.announcement.enabled ? "green" : "neutral",
-        },
-        { text: "Stories: archetypes", tone: "blue" },
-      ],
-    },
-    {
-      id: "events",
-      name: "Events",
-      description:
-        "The events directory, event detail pages and the Grand Finale.",
-      sources: ["content/events.json", "content/grand-finale.json"],
-      rows: [
-        {
-          label: "Events",
-          value: `${events.length} items — ${upcomingEvents} upcoming`,
-        },
-        {
-          label: "Grand Finale date",
-          value: `${grandFinale.dateDisplay} — ${
-            grandFinale.dateConfirmed ? "confirmed" : "NOT confirmed (tentative)"
-          }`,
-        },
-        {
-          label: "Grand Finale venue",
-          value: `${grandFinale.venue}, ${grandFinale.city}`,
-        },
-        {
-          label: "Speakers",
-          value: grandFinale.speakersAnnounced ? "Announced" : "Not announced",
-        },
-      ],
-      chips: [
-        {
-          text:
-            sampleEvents === events.length
-              ? `${events.length} items — all sample`
-              : `${sampleEvents} of ${events.length} sample`,
-          tone: sampleEvents > 0 ? "saffron" : "green",
-        },
-        {
-          text: grandFinale.dateConfirmed ? "Date confirmed" : "Date tentative",
-          tone: grandFinale.dateConfirmed ? "green" : "saffron",
-        },
-      ],
-    },
-    {
-      id: "ecosystem",
-      name: "Ecosystem",
-      description:
-        "The national network map, mentor wall and partner categories.",
-      sources: [
-        "content/locations.json",
-        "content/mentors.json",
-        "content/partners.json",
-      ],
-      rows: [
-        {
-          label: "Locations",
-          value: `${locations.length} network nodes — ${sampleLocations} illustrative`,
-        },
-        {
-          label: "Mentors",
-          value: `${mentors.length} profiles — ${announcedMentors} announced`,
-        },
-        {
-          label: "Partners",
-          value: `${partners.length} categories — ${confirmedPartners} confirmed of ${totalSlots} slots`,
-        },
-      ],
-      chips: [
-        {
-          text: `Mentors: ${announcedMentors} announced`,
-          tone: announcedMentors > 0 ? "green" : "neutral",
-        },
-        {
-          text: `Partners: ${confirmedPartners} confirmed`,
-          tone: confirmedPartners > 0 ? "green" : "neutral",
-        },
-        ...(sampleLocations > 0
-          ? [{ text: "Map: illustrative", tone: "saffron" as ChipTone }]
-          : []),
-      ],
-    },
-    {
-      id: "media",
-      name: "Media",
-      description: "Press releases, announcements, coverage and the press kit.",
-      sources: ["content/media.json"],
-      rows: [
-        {
-          label: "Items",
-          value: `${media.items.length} published — ${sampleMedia} sample`,
-        },
-        {
-          label: "Downloads",
-          value: `${media.downloads.length} listed — ${availableDownloads} available`,
-        },
-      ],
-      chips: [
-        {
-          text:
-            sampleMedia === media.items.length && media.items.length > 0
-              ? "All items sample"
-              : `${sampleMedia} sample items`,
-          tone: sampleMedia > 0 ? "saffron" : "green",
-        },
-        {
-          text:
-            availableDownloads === 0
-              ? "Press kit pending"
-              : `${availableDownloads} downloads live`,
-          tone: availableDownloads === 0 ? "neutral" : "green",
-        },
-      ],
-    },
-    {
-      id: "branding",
-      name: "Branding",
-      description:
-        "Official associations and the generic ecosystem support line. Associations go live only with formally approved wording and official assets.",
-      sources: ["content/branding.json"],
-      rows: [
-        {
-          label: "Associations",
-          value: `${branding.associations.length} managed`,
-        },
-        ...branding.associations.map((a) => ({
-          label: a.organization,
-          value: a.enabled
-            ? `ENABLED — "${a.wording}"`
-            : "DISABLED (pending approval)",
-        })),
-        {
-          label: "Generic support line",
-          value: branding.genericSupportLine.enabled ? "Enabled" : "Disabled",
-        },
-      ],
-      chips: branding.associations.map((a) => ({
-        text: `${a.id} ${a.enabled ? "ENABLED" : "DISABLED"}`,
-        tone: (a.enabled ? "green" : "saffron") as ChipTone,
-      })),
-    },
-    {
-      id: "registration",
-      name: "Registration",
-      description:
-        "The application form and where submissions land. No applicant data is rendered on the public site.",
-      sources: ["data/applications.json"],
-      rows: [
-        {
-          label: "Storage",
-          value: "Applications stored server-side in data/applications.json",
-        },
-        {
-          label: "Access",
-          value: "Filesystem access only — not exposed via any public route",
-        },
-        {
-          label: "Export",
-          value: "See CMS.md for export and database-migration guidance",
-        },
-      ],
-      chips: [{ text: "Server-side store", tone: "blue" }],
-    },
-    {
-      id: "analytics",
-      name: "Analytics",
-      description:
-        "National impact metrics shown across the site. Values stay null — and render as placeholder patterns — until verified.",
-      sources: ["content/stats.json"],
-      rows: [
-        {
-          label: "Metrics",
-          value: `${stats.length} metrics — ${statPlaceholders} placeholders awaiting verified values`,
-        },
-        ...stats.map((s) => ({
-          label: s.label,
-          value:
-            s.value === null
-              ? `placeholder "${s.placeholder}${s.suffix}"`
-              : `${s.value}${s.suffix} (verified)`,
-        })),
-        {
-          label: "Traffic analytics",
-          value: "Integration point — see CMS.md",
-        },
-      ],
-      chips: [
-        {
-          text:
-            statPlaceholders > 0
-              ? `${statPlaceholders} of ${stats.length} placeholders`
-              : "All metrics verified",
-          tone: statPlaceholders > 0 ? "saffron" : "green",
-        },
-      ],
-    },
+      const regs = regsResult.data || [];
+      setStats({
+        totalRegistrations: regs.length,
+        pendingRegistrations: regs.filter((r) => r.status === "pending").length,
+        approvedRegistrations: regs.filter((r) => r.status === "approved").length,
+        rejectedRegistrations: regs.filter((r) => r.status === "rejected").length,
+        totalEvents: eventsResult.count || 0,
+        totalTickets: ticketsResult.count || 0,
+        checkedIn: checkedInResult.count || 0,
+      });
+
+      setRecent((recentResult.data as unknown as RecentRegistration[]) || []);
+      setLoading(false);
+    }
+    fetchStats();
+  }, [page]);
+
+  const statCards = [
+    { label: "Total Registrations", value: stats.totalRegistrations, color: "bg-blue-800" },
+    { label: "Pending", value: stats.pendingRegistrations, color: "bg-saffron-500" },
+    { label: "Approved", value: stats.approvedRegistrations, color: "bg-green-600" },
+    { label: "Rejected", value: stats.rejectedRegistrations, color: "bg-red-500" },
+    { label: "Total Events", value: stats.totalEvents, color: "bg-blue-800" },
+    { label: "Tickets Issued", value: stats.totalTickets, color: "bg-saffron-600" },
+    { label: "Check-ins", value: stats.checkedIn, color: "bg-green-600" },
   ];
-}
 
-export default function AdminPage() {
-  const modules = buildModules();
+  const statusBadge = (status: string) => {
+    const cls =
+      status === "approved"
+        ? "bg-green-100 text-green-700"
+        : status === "rejected"
+          ? "bg-red-100 text-red-700"
+          : "bg-saffron-100 text-saffron-700";
+    return (
+      <span className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${cls}`}>
+        {status}
+      </span>
+    );
+  };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <p className="text-sm text-ink-400">Loading dashboard…</p>
+      </div>
+    );
+  }
 
   return (
-    <>
-      {/* Console header */}
-      <section
-        aria-labelledby="admin-heading"
-        className="grid-texture bg-white py-12 text-ink-950 md:py-16"
-      >
-        <Container>
-          <div className="flex max-w-3xl flex-col items-start gap-4">
-            <Eyebrow tone="dark" withRule>
-              Internal
-            </Eyebrow>
-            <h1 id="admin-heading" className="display-md text-ink-950">
-              CMS CONSOLE
-            </h1>
-            <p className="text-sm leading-relaxed text-ink-600">
-              Internal console — content is managed through the file-based
-              content model described in CMS.md. This page reflects the live
-              content state.
+    <div>
+      <div className="mb-8">
+        <h1 className="font-display text-2xl font-bold text-ink-950">Dashboard</h1>
+        <p className="mt-1 text-sm text-ink-600">Overview of LaunchBharat operations</p>
+      </div>
+
+      {/* Stats grid */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {statCards.map((card) => (
+          <div
+            key={card.label}
+            className="rounded-xl border border-line bg-white p-5 shadow-sm"
+          >
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400">
+              {card.label}
+            </p>
+            <p className="mt-2 font-display text-3xl font-bold text-ink-950">{card.value}</p>
+            <div className={`mt-3 h-1 w-12 rounded-full ${card.color}`} />
+          </div>
+        ))}
+      </div>
+
+      {/* Quick actions */}
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <Link
+          href="/admin/users"
+          className="flex items-center gap-4 rounded-xl border border-line bg-white p-5 shadow-sm transition hover:border-saffron-500"
+        >
+          <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-saffron-100 text-2xl">
+            👥
+          </span>
+          <div>
+            <p className="font-semibold text-ink-950">User Management</p>
+            <p className="text-sm text-ink-600">
+              View, approve or reject user registrations
             </p>
           </div>
-        </Container>
-      </section>
-
-      {/* Module cards */}
-      <section aria-label="Content modules" className="bg-paper py-12 md:py-16">
-        <Container>
-          <div className="grid gap-6 lg:grid-cols-2">
-            {modules.map((mod) => (
-              <article
-                key={mod.id}
-                aria-labelledby={`module-${mod.id}`}
-                className="flex flex-col border border-line bg-white"
-              >
-                <header className="border-b border-line px-6 py-5">
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <h2
-                      id={`module-${mod.id}`}
-                      className="text-sm font-bold uppercase tracking-[0.22em] text-navy-900"
-                    >
-                      {mod.name}
-                    </h2>
-                    <div className="flex flex-wrap gap-2">
-                      {mod.chips.map((chip) => (
-                        <Badge key={chip.text} tone={chip.tone}>
-                          {chip.text}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-600">
-                    {mod.description}
-                  </p>
-                </header>
-                <dl className="flex-1 divide-y divide-line">
-                  {mod.rows.map((row) => (
-                    <div
-                      key={`${mod.id}-${row.label}`}
-                      className="grid gap-1 px-6 py-3 sm:grid-cols-[10rem_1fr] sm:gap-4"
-                    >
-                      <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-400">
-                        {row.label}
-                      </dt>
-                      <dd className="text-sm text-ink-800">{row.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <footer className="border-t border-line bg-paper px-6 py-3">
-                  <p className="flex flex-wrap items-center gap-2 text-xs text-ink-400">
-                    <span className="font-semibold uppercase tracking-[0.14em]">
-                      Source
-                    </span>
-                    {mod.sources.map((src) => (
-                      <code
-                        key={src}
-                        className="border border-line bg-white px-1.5 py-0.5 font-mono text-[11px] text-ink-600"
-                      >
-                        {src}
-                      </code>
-                    ))}
-                  </p>
-                </footer>
-              </article>
-            ))}
+        </Link>
+        <Link
+          href="/admin/events"
+          className="flex items-center gap-4 rounded-xl border border-line bg-white p-5 shadow-sm transition hover:border-saffron-500"
+        >
+          <span className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-100 text-2xl">
+            📅
+          </span>
+          <div>
+            <p className="font-semibold text-ink-950">Event Management</p>
+            <p className="text-sm text-ink-600">
+              Create and manage events
+            </p>
           </div>
-          <p className="mt-8 text-xs text-ink-400">
-            Placeholder and sample data is flagged above so nothing ships as
-            fabricated credibility. Operating procedures, policies and the full
-            content model map are documented in CMS.md at the repository root.
-          </p>
-        </Container>
-      </section>
-    </>
+        </Link>
+      </div>
+
+      {/* Recent registrations */}
+      <div className="mt-8">
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-lg font-semibold text-ink-950">
+            Recent Registrations
+          </h2>
+          <Link href="/admin/users" className="text-sm font-medium text-saffron-600 hover:text-saffron-700">
+            View all →
+          </Link>
+        </div>
+        <div className="mt-4 overflow-hidden rounded-xl border border-line bg-white shadow-sm">
+          {recent.length === 0 ? (
+            <div className="px-6 py-10 text-center text-sm text-ink-400">
+              No registrations yet
+            </div>
+          ) : (
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-line bg-slate-50">
+                  <th className="px-4 py-3 text-left font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
+                    Name
+                  </th>
+                  <th className="px-4 py-3 text-left font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
+                    Ticket ID
+                  </th>
+                  <th className="px-4 py-3 text-left font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
+                    Status
+                  </th>
+                  <th className="px-4 py-3 text-left font-mono text-[10px] uppercase tracking-[0.16em] text-ink-400">
+                    Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-line">
+                {recent.map((reg) => (
+                  <tr key={reg.id} className="hover:bg-slate-50 transition">
+                    <td className="px-4 py-3">
+                      <p className="text-sm font-medium text-ink-950">
+                        {reg.profiles?.full_name || "—"}
+                      </p>
+                      <p className="text-xs text-ink-400">
+                        {reg.profiles?.email || "—"}
+                      </p>
+                    </td>
+                    <td className="px-4 py-3 font-mono text-xs text-ink-600">
+                      {reg.ticket_id}
+                    </td>
+                    <td className="px-4 py-3">{statusBadge(reg.status)}</td>
+                    <td className="px-4 py-3 text-xs text-ink-400">
+                      {new Date(reg.created_at).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+          {recent.length > 0 && (
+            <div className="flex items-center justify-between border-t border-line bg-slate-50 px-6 py-3">
+              <button
+                disabled={page === 1}
+                onClick={() => setPage(p => Math.max(1, p - 1))}
+                className="text-sm font-medium text-ink-600 hover:text-ink-950 disabled:opacity-50"
+              >
+                ← Previous
+              </button>
+              <span className="text-xs text-ink-400">Page {page}</span>
+              <button
+                disabled={recent.length < limit}
+                onClick={() => setPage(p => p + 1)}
+                className="text-sm font-medium text-ink-600 hover:text-ink-950 disabled:opacity-50"
+              >
+                Next →
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }

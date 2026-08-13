@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import type { LbEvent } from "@/lib/content";
 import EventCard from "./EventCard";
+import { createClient } from "@/lib/supabase-browser";
 
 type StatusFilter = "all" | "upcoming" | "completed";
 
@@ -15,33 +16,102 @@ const STATUS_TABS: { value: StatusFilter; label: string }[] = [
 const selectCls =
   "rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition-colors duration-200 hover:border-saffron-500 focus:border-saffron-500 focus:outline-none";
 
-export default function EventsDirectory({ events }: { events: LbEvent[] }) {
+export default function EventsDirectory({ events: initialEvents }: { events: LbEvent[] }) {
+  const [events, setEvents] = useState<LbEvent[]>(initialEvents);
   const [status, setStatus] = useState<StatusFilter>("all");
   const [city, setCity] = useState("all");
   const [category, setCategory] = useState("all");
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const isInitialMount = useRef(true);
+  const supabase = createClient();
+  const PAGE_SIZE = 9;
 
-  const cities = useMemo(
-    () => [...new Set(events.map((e) => e.city))].sort(),
-    [events],
-  );
-  const categories = useMemo(
-    () => [...new Set(events.map((e) => e.category))].sort(),
-    [events],
-  );
-  const hasSample = events.some((e) => e.sample);
+  // Whenever filters change, reset pagination
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    setPage(1);
+    setHasMore(true);
+    fetchEvents(1, true);
+  }, [status, city, category]);
 
-  const filtered = useMemo(
-    () =>
-      events
-        .filter(
+  const fetchEvents = async (pageNumber: number, reset: boolean) => {
+    setLoading(true);
+    let query = supabase
+      .from("events")
+      .select("*")
+      .order("date_start", { ascending: true });
+
+    if (status !== "all") query = query.eq("status", status);
+    if (city !== "all") query = query.eq("city", city);
+    if (category !== "all") query = query.eq("category", category);
+
+    const from = (pageNumber - 1) * PAGE_SIZE;
+    const to = from + PAGE_SIZE - 1;
+    
+    const { data } = await query.range(from, to);
+    
+    if (data) {
+      const mapped = data.map((e: any) => ({
+        id: e.id,
+        slug: e.slug,
+        sample: false,
+        title: e.title,
+        city: e.city || e.venue,
+        state: e.state || "",
+        dateStart: e.date_start,
+        dateEnd: e.date_end,
+        venue: e.venue,
+        category: e.category,
+        status: e.status,
+        registrationOpen: e.registration_open,
+        summary: e.summary || "",
+        description: e.description || "",
+        highlights: e.highlights || [],
+      }));
+      
+      if (reset) {
+        // Also keep static sample events that match the filter
+        const staticEvents = initialEvents.filter(e => e.sample);
+        const filteredStatic = staticEvents.filter(
           (e) =>
             (status === "all" || e.status === status) &&
             (city === "all" || e.city === city) &&
-            (category === "all" || e.category === category),
-        )
-        .sort((a, b) => a.dateStart.localeCompare(b.dateStart)),
-    [events, status, city, category],
+            (category === "all" || e.category === category)
+        );
+        const combined = [...mapped, ...filteredStatic].sort((a, b) => {
+          if (a.status === "upcoming" && b.status === "completed") return -1;
+          if (a.status === "completed" && b.status === "upcoming") return 1;
+          return a.dateStart.localeCompare(b.dateStart);
+        });
+        setEvents(combined);
+      } else {
+        setEvents(prev => [...prev, ...mapped]);
+      }
+      setHasMore(data.length === PAGE_SIZE);
+    }
+    setLoading(false);
+  };
+
+  const loadMore = () => {
+    const nextPage = page + 1;
+    setPage(nextPage);
+    fetchEvents(nextPage, false);
+  };
+
+  const cities = useMemo(
+    () => [...new Set(initialEvents.map((e) => e.city))].sort(),
+    [initialEvents],
   );
+  const categories = useMemo(
+    () => [...new Set(initialEvents.map((e) => e.category))].sort(),
+    [initialEvents],
+  );
+  const hasSample = events.some((e) => e.sample);
 
   return (
     <div>
@@ -124,7 +194,7 @@ export default function EventsDirectory({ events }: { events: LbEvent[] }) {
           aria-live="polite"
           className="font-mono text-xs uppercase tracking-[0.18em] text-ink-400"
         >
-          {filtered.length} {filtered.length === 1 ? "program" : "programs"}
+          {events.length} {events.length === 1 ? "program" : "programs"}
         </p>
         {hasSample && (
           <p className="text-xs text-ink-400">
@@ -134,12 +204,25 @@ export default function EventsDirectory({ events }: { events: LbEvent[] }) {
       </div>
 
       {/* Results */}
-      {filtered.length > 0 ? (
-        <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((event) => (
-            <EventCard key={event.id} event={event} />
-          ))}
-        </div>
+      {events.length > 0 ? (
+        <>
+          <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {events.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+          {hasMore && (
+            <div className="mt-10 flex justify-center">
+              <button
+                onClick={loadMore}
+                disabled={loading}
+                className="rounded-full bg-slate-900 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:opacity-50"
+              >
+                {loading ? "Loading..." : "Load Next Events"}
+              </button>
+            </div>
+          )}
+        </>
       ) : (
         <div className="glass mt-6 flex flex-col items-center gap-4 rounded-2xl p-12 text-center">
           <span className="chip-mono">0 results</span>

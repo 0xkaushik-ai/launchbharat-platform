@@ -8,6 +8,7 @@ import {
   formatEventDates,
   registrationStatus,
 } from "@/components/events/EventCard";
+import { createClient } from "@/lib/supabase-server";
 
 export function generateStaticParams() {
   return getEvents().map((event) => ({ slug: event.slug }));
@@ -19,8 +20,21 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const event = getEventBySlug(slug);
-  if (!event) return { title: "Event not found" };
+  let event = getEventBySlug(slug);
+  
+  if (!event) {
+    const supabase = await createClient();
+    const { data: dbEvent } = await supabase
+      .from("events")
+      .select("title, summary")
+      .eq("slug", slug)
+      .single();
+    if (dbEvent) {
+      return { title: dbEvent.title, description: dbEvent.summary || "" };
+    }
+    return { title: "Event not found" };
+  }
+  
   return { title: event.title, description: event.summary };
 }
 
@@ -65,7 +79,38 @@ export default async function EventDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const event = getEventBySlug(slug);
+  let event = getEventBySlug(slug);
+  
+  // Fallback to database if not in static content
+  if (!event) {
+    const supabase = await createClient();
+    const { data: dbEvent } = await supabase
+      .from("events")
+      .select("*")
+      .eq("slug", slug)
+      .single();
+      
+    if (dbEvent) {
+      event = {
+        id: dbEvent.id,
+        slug: dbEvent.slug,
+        sample: false,
+        title: dbEvent.title,
+        city: dbEvent.city || dbEvent.venue,
+        state: dbEvent.state || "",
+        dateStart: dbEvent.date_start,
+        dateEnd: dbEvent.date_end,
+        venue: dbEvent.venue,
+        category: dbEvent.category,
+        status: dbEvent.status,
+        registrationOpen: dbEvent.registration_open,
+        summary: dbEvent.summary || "",
+        description: dbEvent.description || "",
+        highlights: dbEvent.highlights || [],
+      };
+    }
+  }
+
   if (!event) notFound();
 
   const reg = registrationStatus(event);

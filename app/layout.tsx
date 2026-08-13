@@ -7,7 +7,7 @@ import StickyRegisterCta from "@/components/layout/StickyRegisterCta";
 import { ScrollProgress } from "@/components/ui";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import { getSite } from "@/lib/content";
-
+import { createClient } from "@/lib/supabase-server";
 const inter = localFont({
   src: "./fonts/inter-var.woff2",
   variable: "--font-inter",
@@ -90,9 +90,12 @@ const organizationSchema = {
   sameAs: site.social.map((s) => s.href),
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
   return (
     <html
       lang="en"
@@ -114,6 +117,7 @@ export default function RootLayout({
           nav={site.nav}
           utilityNav={site.utilityNav}
           announcement={site.announcement}
+          user={user}
         />
         <main id="main">{children}</main>
         <Footer />

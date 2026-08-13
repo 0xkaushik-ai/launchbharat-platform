@@ -1,23 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogoMark, Button } from "@/components/ui";
 import type { NavItem } from "@/lib/content";
+import type { User } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase-browser";
 
 export default function Header({
   nav,
   utilityNav,
   announcement,
+  user,
 }: {
   nav: NavItem[];
   utilityNav: NavItem[];
   announcement: { enabled: boolean; text: string; href: string };
+  user: User | null;
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    router.push("/");
+    router.refresh();
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -72,7 +84,7 @@ export default function Header({
       </div>
 
       {/* Main bar */}
-      <div className={`sticky top-0 border-b border-line bg-white shadow-sm transition-[padding] duration-300 ${
+      <div className={`relative z-10 border-b border-line bg-white shadow-sm transition-[padding] duration-300 ${
         scrolled ? "py-2.5" : "py-4"
       }`}>
         <div className="container-lb flex items-center justify-between gap-6">
@@ -99,14 +111,42 @@ export default function Header({
           </nav>
 
           <div className="flex items-center gap-3">
-            <Button
-              href="/register"
-              variant="primary"
-              size="sm"
-              className="hidden sm:inline-flex"
-            >
-              Register now
-            </Button>
+            {user ? (
+              <div className="relative group hidden sm:block">
+                <button
+                  type="button"
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-saffron-100 text-saffron-700 hover:bg-saffron-200 transition focus:outline-none focus:ring-2 focus:ring-saffron-500 focus:ring-offset-2"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                  </svg>
+                </button>
+                <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 focus-within:opacity-100 focus-within:visible">
+                  <Link
+                    href="/profile"
+                    className="block px-4 py-2 text-sm text-ink-800 hover:bg-slate-50 transition"
+                  >
+                    Your Profile
+                  </Link>
+                  <button
+                    onClick={handleSignOut}
+                    className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Button
+                href="/register"
+                variant="primary"
+                size="sm"
+                className="hidden sm:inline-flex"
+              >
+                Register now
+              </Button>
+            )}
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
@@ -194,9 +234,20 @@ export default function Header({
             </ul>
           </nav>
           <div className="container-lb relative pb-8">
-            <Button href="/register" variant="primary" size="lg" className="w-full">
-              Register now
-            </Button>
+            {user ? (
+              <div className="space-y-3">
+                <Button href="/profile" variant="primary" size="lg" className="w-full">
+                  View Profile
+                </Button>
+                <Button onClick={handleSignOut} variant="secondary" size="lg" className="w-full text-red-600 border-red-200 hover:bg-red-50">
+                  Sign out
+                </Button>
+              </div>
+            ) : (
+              <Button href="/register" variant="primary" size="lg" className="w-full">
+                Register now
+              </Button>
+            )}
           </div>
         </div>
       )}

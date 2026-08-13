@@ -8,7 +8,9 @@ import {
   type FormEvent,
   type ReactNode,
 } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui";
+import { createClient } from "@/lib/supabase-browser";
 
 /* ——— Static form data ——— */
 
@@ -544,6 +546,8 @@ export default function RegistrationForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [applicationId, setApplicationId] = useState<string | null>(null);
+  const supabase = createClient();
+  const router = useRouter();
 
   const rootRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -685,7 +689,23 @@ export default function RegistrationForm() {
         typeof (body as { id: unknown }).id === "string"
           ? (body as { id: string }).id
           : null;
+      const generatedPassword =
+        body && typeof body === "object" && "generatedPassword" in body &&
+        typeof (body as { generatedPassword: unknown }).generatedPassword === "string"
+          ? (body as { generatedPassword: string }).generatedPassword
+          : null;
+
       if (!id) throw new Error("Something went wrong on our side.");
+
+      if (generatedPassword) {
+        await supabase.auth.signInWithPassword({
+          email: payload.email as string,
+          password: generatedPassword,
+        });
+        // Refresh layout to update Header
+        router.refresh();
+      }
+
       try {
         window.sessionStorage.removeItem(DRAFT_KEY);
       } catch {

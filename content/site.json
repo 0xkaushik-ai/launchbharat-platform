@@ -34,8 +34,7 @@
     { "label": "Accessibility", "href": "/accessibility" },
     { "label": "हिन्दी", "href": "/accessibility#language" },
     { "label": "Media", "href": "/media" },
-    { "label": "Contact", "href": "/contact" },
-    { "label": "Sitemap", "href": "/sitemap.xml" }
+    { "label": "Contact", "href": "/contact" }
   ],
   "announcement": {
     "enabled": true,

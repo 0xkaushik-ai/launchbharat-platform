@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { getEvents } from "@/lib/content";
+import { getEvents as getStaticEvents } from "@/lib/content";
 import { Container, Eyebrow } from "@/components/ui";
 import EventsDirectory from "@/components/events/EventsDirectory";
+import { createClient } from "@/lib/supabase-server";
 
 export const metadata: Metadata = {
   title: "Events",
@@ -9,8 +10,44 @@ export const metadata: Metadata = {
     "The LaunchBharat national calendar — roadshows, bootcamps, pitch days and forums across India and online.",
 };
 
-export default function EventsPage() {
-  const events = getEvents();
+export const revalidate = 0; // Don't cache since we pull from DB
+
+export default async function EventsPage() {
+  const supabase = await createClient();
+  const { data: dbEvents } = await supabase
+    .from("events")
+    .select("*")
+    .order("date_start", { ascending: true })
+    .limit(9);
+
+  const staticEvents = getStaticEvents();
+
+  // Map db events to the shape expected by EventsDirectory
+  const mappedDbEvents = (dbEvents || []).map((e: any) => ({
+    id: e.id,
+    slug: e.slug,
+    sample: false,
+    title: e.title,
+    city: e.city || e.venue,
+    state: e.state || "",
+    dateStart: e.date_start,
+    dateEnd: e.date_end,
+    venue: e.venue,
+    category: e.category,
+    status: e.status,
+    registrationOpen: e.registration_open,
+    summary: e.summary || "",
+    description: e.description || "",
+    highlights: e.highlights || [],
+  }));
+
+  // Combine them, placing upcoming db events first
+  const allEvents = [...mappedDbEvents, ...staticEvents].sort((a, b) => {
+    // Upcoming first, then by date
+    if (a.status === "upcoming" && b.status === "completed") return -1;
+    if (a.status === "completed" && b.status === "upcoming") return 1;
+    return new Date(a.dateStart).getTime() - new Date(b.dateStart).getTime();
+  });
 
   return (
     <>
@@ -19,16 +56,6 @@ export default function EventsPage() {
         className="relative overflow-hidden bg-white py-20 md:py-24"
       >
         <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 460, height: 460, top: -180, right: -140 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 360, height: 360, bottom: -220, left: -120 }}
-        />
         <Container className="relative">
           <Eyebrow>Events</Eyebrow>
           <h1 id="events-hero-heading" className="display-lg mt-5 text-ink-950">
@@ -45,7 +72,7 @@ export default function EventsPage() {
 
       <section aria-label="Events directory" className="section-pad bg-white">
         <Container>
-          <EventsDirectory events={events} />
+          <EventsDirectory events={allEvents} />
         </Container>
       </section>
     </>
