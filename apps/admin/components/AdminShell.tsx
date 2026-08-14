@@ -26,7 +26,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
     <div className="min-h-screen bg-paper lg:grid lg:grid-cols-[260px_1fr]">
       <aside className="relative border-b border-line bg-white/90 backdrop-blur-md lg:min-h-screen lg:border-b-0 lg:border-r">
         <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-4 lg:block">
-          <Image src="/logo.jpg" alt="LaunchBharat" width={180} height={60} className="h-9 w-auto object-contain" priority />
+          <Image src="/logo.jpg" alt="LaunchBharat" width={280} height={129} className="h-12 w-auto object-contain object-left lg:h-14" priority />
           <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400 lg:mt-2">Operations console</p>
         </div>
         <nav className="overflow-x-auto p-3" aria-label="Admin navigation">
