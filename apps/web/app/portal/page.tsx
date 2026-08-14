@@ -14,18 +14,28 @@ export default async function PortalPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/portal/login?next=/portal");
 
-  const [{ data: profile }, { data: applications, error }] = await Promise.all([
+  const [{ data: profile }, { data: applications, error }, { data: ticketRows, error: ticketsError }] = await Promise.all([
     supabase.from("profiles").select("full_name, onboarding_completed").eq("id", user.id).maybeSingle(),
     supabase
       .from("applications")
       .select("application_no, idea_title, category, stage, status, created_at")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false }),
+    supabase
+      .from("event_tickets")
+      .select("ticket_code, status, created_at, events(title, slug, date_start, venue), event_registrations(status)")
+      .eq("user_id", user.id)
+      .order("created_at", { ascending: false }),
   ]);
 
-  if (error) throw new Error("We could not load your application right now.");
+  if (error || ticketsError) throw new Error("We could not load your portal right now.");
   const application = applications?.[0];
   const name = profile?.full_name?.trim() || user.user_metadata.full_name || "there";
+  const tickets = (ticketRows ?? []) as unknown as Array<{
+    ticket_code: string;
+    status: string;
+    events: { title: string; slug: string; date_start: string; venue: string } | null;
+  }>;
 
   return (
     <main className="mx-auto max-w-4xl">
@@ -72,6 +82,30 @@ export default async function PortalPage() {
             <p className="mt-1 text-sm leading-relaxed text-ink-600">{detail}</p>
           </div>
         ))}
+      </section>
+
+      <section className="mt-8 rounded-2xl border border-line bg-white p-6 shadow-sm sm:p-8">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="chip-mono">My event tickets</p>
+            <h2 className="mt-2 font-display text-2xl font-semibold text-ink-950">Your confirmed registrations</h2>
+          </div>
+          <Link href="/events" className="text-sm font-semibold text-saffron-600 hover:text-saffron-700">Explore events</Link>
+        </div>
+        {tickets.length === 0 ? (
+          <p className="mt-5 text-sm leading-relaxed text-ink-600">When you confirm an event registration, its ticket will appear here automatically.</p>
+        ) : (
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {tickets.map((ticket) => (
+              <article key={ticket.ticket_code} className="rounded-xl border border-line bg-slate-50 p-5">
+                <p className="font-mono text-xs font-bold tracking-wide text-saffron-600">{ticket.ticket_code}</p>
+                <h3 className="mt-2 font-semibold text-ink-950">{ticket.events?.title ?? "LaunchBharat event"}</h3>
+                {ticket.events && <p className="mt-1 text-sm text-ink-600">{new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(new Date(`${ticket.events.date_start}T00:00:00`))} · {ticket.events.venue}</p>}
+                <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-green-700">{ticket.status.replace("_", " ")}</p>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

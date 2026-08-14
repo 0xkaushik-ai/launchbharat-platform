@@ -178,7 +178,7 @@ export default function EventCard({
             <Button
               size="sm"
               variant="primary"
-              href="/register"
+              href={event.sample ? "/register" : `/events/${event.slug}/register`}
               ariaLabel={`Register for ${event.title}`}
             >
               Register

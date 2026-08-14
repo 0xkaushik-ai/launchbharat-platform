@@ -444,6 +444,7 @@ export type Database = {
         Returns: boolean
       }
       is_staff: { Args: never; Returns: boolean }
+      register_for_event: { Args: { p_event_id: string }; Returns: Json }
       review_application: {
         Args: {
           application_id: string
