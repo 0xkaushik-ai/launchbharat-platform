@@ -54,7 +54,7 @@ export default function AcceptInvitePage() {
     <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-paper p-5">
       <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
       <form onSubmit={submit} className="surface relative w-full max-w-md p-8">
-        <Image src="/logo.jpg" alt="LaunchBharat" width={220} height={70} className="mx-auto h-12 w-auto object-contain" priority />
+        <Image src="/logo.jpg" alt="LaunchBharat" width={320} height={147} className="mx-auto h-16 w-auto object-contain" priority />
         <h1 className="mt-7 text-center font-display text-2xl font-bold">Accept admin invitation</h1>
         <p className="mt-1 text-center text-sm text-ink-600">Set the password for your LaunchBharat staff account.</p>
         <label className="mt-7 block text-sm font-medium">New password<input type="password" required minLength={8} autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} disabled={!ready || saving} className="mt-2 w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-iris-500 disabled:bg-slate-50" /></label>

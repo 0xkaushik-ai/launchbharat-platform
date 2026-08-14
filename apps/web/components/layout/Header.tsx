@@ -84,10 +84,11 @@ export default function Header({
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="hidden border-b border-line/80 bg-paper/90 text-ink-600 backdrop-blur-md sm:block">
+    <header className="sticky top-0 z-50 pb-2">
+      <div className="hidden border-b border-white/70 bg-white/70 text-ink-600 backdrop-blur-xl sm:block">
         <div className="container-lb flex items-center justify-between py-1.5 text-[11px]">
-          <p className="font-mono uppercase tracking-[0.18em] text-ink-400">
+          <p className="flex items-center gap-2 font-mono uppercase tracking-[0.18em] text-ink-500">
+            <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(56,189,248,0.75)]" aria-hidden="true" />
             A nationwide startup &amp; innovation movement
           </p>
           <nav aria-label="Utility">
@@ -109,103 +110,116 @@ export default function Header({
         </div>
       </div>
 
-      <div className={`border-b border-line/80 bg-white/80 shadow-[0_1px_0_rgb(15_23_42/0.03)] backdrop-blur-xl transition-[padding] duration-300 ${
-        scrolled ? "py-2.5" : "py-3.5"
+      <div className={`px-2 transition-[padding] duration-300 sm:px-4 ${
+        scrolled ? "pt-2" : "pt-3"
       }`}>
-        <div className="container-lb flex items-center justify-between gap-6">
-          <Link href="/" className="shrink-0" aria-label="LaunchBharat — home">
-            <LogoMark variant="light" size={scrolled ? "sm" : "md"} />
-          </Link>
-
-          <nav aria-label="Primary" className="hidden lg:block">
-            <ul className="flex items-center gap-1">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={isActive(item.href) ? "page" : undefined}
-                    className={`rounded-full px-3 py-2 text-[13px] font-medium tracking-wide transition ${
-                      isActive(item.href)
-                        ? "bg-iris-100 text-iris-600"
-                        : "text-ink-800 hover:bg-mist hover:text-ink-950"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex items-center gap-3">
-            {currentUser ? (
-              <div className="relative hidden sm:block" ref={accountRef}>
-                <button
-                  type="button"
-                  aria-expanded={accountOpen}
-                  aria-haspopup="menu"
-                  onClick={() => setAccountOpen((open) => !open)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-iris-100 text-iris-600 transition hover:bg-iris-100/80 focus:outline-none"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                  <span className="sr-only">Open account menu</span>
-                </button>
-                {accountOpen && (
-                  <div
-                    role="menu"
-                    className="absolute right-0 mt-2 w-48 overflow-hidden rounded-xl border border-line bg-white py-1 shadow-[0_16px_40px_-20px_rgb(15_23_42/0.3)]"
-                  >
-                    <Link
-                      href="/portal"
-                      role="menuitem"
-                      className="block px-4 py-2.5 text-sm text-ink-800 transition hover:bg-mist"
-                    >
-                      Your portal
-                    </Link>
-                    <button
-                      onClick={handleSignOut}
-                      role="menuitem"
-                      className="block w-full px-4 py-2.5 text-left text-sm text-red-600 transition hover:bg-red-50"
-                    >
-                      Sign out
-                    </button>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <Button
-                href="/register"
-                variant="primary"
-                size="sm"
-                className="hidden sm:inline-flex"
-              >
-                Register now
-              </Button>
-            )}
-            <button
-              type="button"
-              onClick={() => setMenuOpen(true)}
-              aria-expanded={menuOpen}
-              aria-controls="mobile-menu"
-              aria-label="Open menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-950 transition hover:bg-mist lg:hidden"
+        <div className="container-lb !px-0">
+          <div className={`water-nav-panel flex items-center justify-between gap-3 px-3 transition-all duration-300 sm:px-4 lg:gap-5 lg:px-5 ${
+            scrolled ? "water-nav-panel--scrolled py-1.5" : "py-2"
+          }`}>
+            <Link
+              href="/"
+              className="water-logo group shrink-0"
+              aria-label="LaunchBharat — home"
             >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M3 6h18M3 12h18M3 18h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-              </svg>
-            </button>
+              <LogoMark
+                variant="light"
+                size={scrolled ? "lg" : "xl"}
+                className="transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+            </Link>
+
+            <nav aria-label="Primary" className="hidden min-w-0 xl:block">
+              <ul className="flex items-center justify-end gap-0.5">
+                {nav.map((item) => {
+                  const active = isActive(item.href);
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        aria-current={active ? "page" : undefined}
+                        className={`water-nav-link whitespace-nowrap px-2.5 py-2 text-[13px] font-medium tracking-wide xl:px-3 ${
+                          active ? "water-nav-link--active" : ""
+                        }`}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+
+            <div className="relative z-10 flex items-center gap-2 sm:gap-3">
+              {currentUser ? (
+                <div className="relative hidden sm:block" ref={accountRef}>
+                  <button
+                    type="button"
+                    aria-expanded={accountOpen}
+                    aria-haspopup="menu"
+                    onClick={() => setAccountOpen((open) => !open)}
+                    className="water-icon-button flex h-10 w-10 items-center justify-center rounded-full text-iris-600 transition focus:outline-none"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                      <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    <span className="sr-only">Open account menu</span>
+                  </button>
+                  {accountOpen && (
+                    <div
+                      role="menu"
+                      className="absolute right-0 mt-3 w-48 overflow-hidden rounded-2xl border border-white/80 bg-white/90 py-1 shadow-[0_20px_55px_-20px_rgb(37_46_86/0.35)] backdrop-blur-2xl"
+                    >
+                      <Link
+                        href="/portal"
+                        role="menuitem"
+                        className="block px-4 py-2.5 text-sm text-ink-800 transition hover:bg-cyan-400/10"
+                      >
+                        Your portal
+                      </Link>
+                      <button
+                        onClick={handleSignOut}
+                        role="menuitem"
+                        className="block w-full px-4 py-2.5 text-left text-sm text-red-600 transition hover:bg-red-50"
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Button
+                  href="/register"
+                  variant="primary"
+                  size="sm"
+                  className="hidden shrink-0 whitespace-nowrap shadow-[0_12px_28px_-12px_rgba(124,58,237,0.65)] sm:inline-flex"
+                >
+                  Register now
+                </Button>
+              )}
+              <button
+                type="button"
+                onClick={() => setMenuOpen(true)}
+                aria-expanded={menuOpen}
+                aria-controls="mobile-menu"
+                aria-label="Open menu"
+                className="water-icon-button inline-flex h-11 w-11 items-center justify-center rounded-full text-ink-950 transition xl:hidden"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M4 7h16M7 12h13M10 17h10" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {announcement.enabled && (
-        <div className="border-b border-line bg-lilac/80 text-center backdrop-blur-sm">
+        <div className="container-lb mt-2 text-center">
           <Link
             href={announcement.href}
-            className="container-lb flex items-center justify-center gap-2 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.16em] text-iris-600 transition hover:text-iris-500"
+            className="water-announcement mx-auto flex w-fit max-w-full items-center justify-center gap-2 rounded-full px-4 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] text-iris-600 transition hover:text-iris-500 sm:text-[11px] sm:tracking-[0.16em]"
           >
             <span
               aria-hidden="true"
@@ -222,15 +236,17 @@ export default function Header({
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
-          className="fixed inset-0 z-50 flex flex-col overflow-hidden bg-white"
+          className="water-mobile-menu fixed inset-0 z-50 flex flex-col overflow-hidden bg-white"
         >
           <div className="container-lb relative flex items-center justify-between py-4">
-            <LogoMark variant="light" size="sm" />
+            <div className="water-logo">
+              <LogoMark variant="light" size="xl" />
+            </div>
             <button
               type="button"
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-950 hover:bg-mist"
+              className="water-icon-button inline-flex h-11 w-11 items-center justify-center rounded-full text-ink-950"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -244,7 +260,7 @@ export default function Header({
                   <Link
                     href={item.href}
                     aria-current={isActive(item.href) ? "page" : undefined}
-                    className={`font-display block border-b border-line py-4 text-2xl font-bold tracking-tight transition hover:text-iris-600 ${
+                    className={`water-mobile-link font-display block border-b border-white/70 py-4 text-2xl font-bold tracking-tight transition hover:text-iris-600 ${
                       isActive(item.href) ? "text-iris-600" : "text-ink-950"
                     }`}
                   >

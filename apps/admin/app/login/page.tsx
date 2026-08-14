@@ -37,7 +37,7 @@ function LoginForm() {
 
   return (
     <form onSubmit={submit} className="surface w-full max-w-md p-8">
-      <Image src="/logo.jpg" alt="LaunchBharat" width={220} height={70} className="mx-auto h-12 w-auto object-contain" priority />
+      <Image src="/logo.jpg" alt="LaunchBharat" width={320} height={147} className="mx-auto h-16 w-auto object-contain" priority />
       <h1 className="mt-7 text-center font-display text-2xl font-bold">Admin sign in</h1>
       <p className="mt-1 text-center text-sm text-ink-600">Only explicitly assigned staff accounts can continue.</p>
       <label className="mt-7 block text-sm font-medium">Email<input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="field-input mt-2" /></label>
