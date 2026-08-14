@@ -550,6 +550,12 @@ export default function RegistrationForm() {
   const [applicationId, setApplicationId] = useState<string | null>(null);
   const [accountUser, setAccountUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [authMode, setAuthMode] = useState<"signup" | "login">("signup");
+  const [accountEmail, setAccountEmail] = useState("");
+  const [accountPassword, setAccountPassword] = useState("");
+  const [authSubmitting, setAuthSubmitting] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [confirmationEmail, setConfirmationEmail] = useState<string | null>(null);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
@@ -657,6 +663,46 @@ export default function RegistrationForm() {
     setStep(target);
   }
 
+  async function handleAccountSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setAuthSubmitting(true);
+    setAuthError(null);
+    const supabase = createClient();
+    const email = accountEmail.trim().toLowerCase();
+
+    if (authMode === "signup") {
+      if (!values.fullName.trim()) {
+        setAuthError("Please enter your full name to create an account.");
+        setAuthSubmitting(false);
+        return;
+      }
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password: accountPassword,
+        options: {
+          data: { full_name: values.fullName.trim() },
+          emailRedirectTo: `${window.location.origin}/auth/callback?next=/register`,
+        },
+      });
+      if (error) setAuthError(error.message);
+      else if (data.session) {
+        setAccountUser(data.user);
+        setValues((current) => ({ ...current, email }));
+      } else {
+        setConfirmationEmail(email);
+      }
+    } else {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password: accountPassword });
+      if (error) {
+        setAuthError("We could not sign you in. Check your email and password, then try again.");
+      } else {
+        setAccountUser(data.user);
+        setValues((current) => ({ ...current, email: data.user.email ?? email }));
+      }
+    }
+    setAuthSubmitting(false);
+  }
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
@@ -743,17 +789,52 @@ export default function RegistrationForm() {
   }
 
   if (!accountUser) {
+    if (confirmationEmail) {
+      return (
+        <div className="glass corner-frame rounded-3xl p-6 sm:p-8 lg:p-10">
+          <p className="chip-mono">Your applicant account</p>
+          <h2 className="display-sm mt-4 text-ink-950">Check your email to continue.</h2>
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-600">
+            We sent a confirmation link to <span className="font-semibold text-ink-800">{confirmationEmail}</span>. Open it in this browser and you will return directly to this application.
+          </p>
+          <button type="button" onClick={() => setConfirmationEmail(null)} className="mt-6 text-sm font-semibold text-saffron-600 hover:text-saffron-700">Use a different email</button>
+        </div>
+      );
+    }
     return (
       <div className="glass corner-frame rounded-3xl p-6 sm:p-8 lg:p-10">
         <p className="chip-mono">Your applicant account</p>
-        <h2 className="display-sm mt-4 text-ink-950">Start with a secure account.</h2>
+        <h2 className="display-sm mt-4 text-ink-950">{authMode === "signup" ? "Create your account to begin." : "Sign in to continue."}</h2>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-600">
-          Your account saves your application, lets you track its review status, and keeps every next step in one personal portal.
+          Your account saves this application, lets you track its review status, and keeps every next step in one personal portal.
         </p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Button href="/portal/signup?next=/register" variant="primary">Create account</Button>
-          <Button href="/portal/login?next=/register" variant="secondary">Sign in</Button>
-        </div>
+        <form onSubmit={handleAccountSubmit} className="mt-7 space-y-5">
+          {authMode === "signup" && (
+            <label className="block text-sm font-medium text-ink-800">
+              Full name
+              <input value={values.fullName} onChange={(event) => setField("fullName", event.target.value)} required autoComplete="name" className={inputCls(false)} />
+            </label>
+          )}
+          <label className="block text-sm font-medium text-ink-800">
+            Email address
+            <input value={accountEmail} onChange={(event) => setAccountEmail(event.target.value)} required type="email" autoComplete="email" className={inputCls(false)} />
+          </label>
+          <label className="block text-sm font-medium text-ink-800">
+            Password
+            <input value={accountPassword} onChange={(event) => setAccountPassword(event.target.value)} required minLength={8} type="password" autoComplete={authMode === "signup" ? "new-password" : "current-password"} className={inputCls(false)} />
+            {authMode === "signup" && <span className="mt-1.5 block text-xs font-normal text-ink-500">Use at least 8 characters.</span>}
+          </label>
+          {authError && <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{authError}</p>}
+          <button disabled={authSubmitting} className="rounded-full bg-saffron-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-saffron-700 disabled:cursor-not-allowed disabled:opacity-60">
+            {authSubmitting ? "Please wait…" : authMode === "signup" ? "Create account and continue" : "Sign in and continue"}
+          </button>
+        </form>
+        <p className="mt-6 text-sm text-ink-600">
+          {authMode === "signup" ? "Already have an account?" : "New to LaunchBharat?"}{" "}
+          <button type="button" onClick={() => { setAuthMode(authMode === "signup" ? "login" : "signup"); setAuthError(null); }} className="font-semibold text-saffron-600 hover:text-saffron-700">
+            {authMode === "signup" ? "Sign in" : "Create your account"}
+          </button>
+        </p>
       </div>
     );
   }
