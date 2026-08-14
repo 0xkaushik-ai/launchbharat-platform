@@ -74,7 +74,7 @@ export default function MediaArchive({ items }: { items: MediaItem[] }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Title or keyword"
-            className="rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition duration-200 placeholder:text-ink-400 focus:border-saffron-500 focus:outline-none focus:ring-2 focus:ring-saffron-500/30"
+            className="rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition duration-200 placeholder:text-ink-400 focus:border-iris-500 focus:outline-none focus:ring-2 focus:ring-iris-500/30"
           />
         </div>
 
@@ -93,8 +93,8 @@ export default function MediaArchive({ items }: { items: MediaItem[] }) {
                 onClick={() => setType(tab.value)}
                 className={`rounded-full border px-4 py-2 font-mono text-[10px] font-medium uppercase tracking-[0.14em] transition duration-200 ${
                   active
-                    ? "border-saffron-500 bg-saffron-500 text-saffron-600"
-                    : "border-line bg-white text-ink-600 hover:border-saffron-500 hover:text-saffron-600"
+                    ? "border-iris-400 bg-iris-500 text-white"
+                    : "border-line bg-white text-ink-600 hover:border-iris-400 hover:text-iris-600"
                 }`}
               >
                 {tab.label}
@@ -114,7 +114,7 @@ export default function MediaArchive({ items }: { items: MediaItem[] }) {
             id="media-archive-sort"
             value={sort}
             onChange={(e) => setSort(e.target.value as SortOrder)}
-            className="rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition duration-200 focus:border-saffron-500 focus:outline-none focus:ring-2 focus:ring-saffron-500/30"
+            className="rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition duration-200 focus:border-iris-500 focus:outline-none focus:ring-2 focus:ring-iris-500/30"
           >
             <option value="newest">Newest first</option>
             <option value="oldest">Oldest first</option>
@@ -157,14 +157,14 @@ export default function MediaArchive({ items }: { items: MediaItem[] }) {
                   <Badge tone={badge.tone}>{badge.label}</Badge>
                 </div>
                 <div>
-                  <h3 className="font-display text-lg font-semibold leading-snug text-ink-950 transition duration-200 group-hover/row:text-saffron-600">
+                  <h3 className="font-display text-lg font-semibold leading-snug text-ink-950 transition duration-200 group-hover/row:text-iris-600">
                     {item.title}
                   </h3>
                   <p className="mt-2 max-w-prose text-sm leading-relaxed text-ink-600">
                     {item.excerpt}
                   </p>
                   <details className="group/details mt-4">
-                    <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-saffron-600 transition duration-200 hover:text-saffron-600 [&::-webkit-details-marker]:hidden">
+                    <summary className="inline-flex cursor-pointer list-none items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-iris-600 transition duration-200 hover:text-iris-600 [&::-webkit-details-marker]:hidden">
                       <svg
                         viewBox="0 0 24 24"
                         fill="none"

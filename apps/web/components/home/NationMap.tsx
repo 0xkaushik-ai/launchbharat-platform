@@ -279,13 +279,13 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
                   onClick={() => setSelectedId(c.id)}
                   className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-[10px] font-medium tracking-[0.14em] whitespace-nowrap uppercase backdrop-blur transition duration-200 ${
                     isSelected
-                      ? "border-saffron-500 bg-white text-saffron-600 shadow-[0_0_24px_-6px_rgba(234,124,12,0.6)]"
-                      : "border-line bg-white/70 text-ink-600 hover:border-saffron-500 hover:text-ink-950"
+                      ? "border-iris-400 bg-white text-iris-600 shadow-[0_0_24px_-6px_rgba(234,124,12,0.6)]"
+                      : "border-line bg-white/70 text-ink-600 hover:border-iris-400 hover:text-ink-950"
                   }`}
                 >
                   <span
                     aria-hidden="true"
-                    className={isSelected ? "text-saffron-600" : "text-ink-400"}
+                    className={isSelected ? "text-iris-600" : "text-ink-400"}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
@@ -301,7 +301,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
           <span className="inline-flex items-center gap-2 text-xs text-ink-600">
             <span
               aria-hidden="true"
-              className="h-2 w-2 rounded-full bg-saffron-500 shadow-[0_0_8px_rgba(234,124,12,0.5)]"
+              className="h-2 w-2 rounded-full bg-iris-500 shadow-[0_0_8px_rgba(234,124,12,0.5)]"
             />
             Tour stop
           </span>
@@ -309,13 +309,13 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
             <span className="inline-flex items-center gap-2 text-xs text-ink-600">
               <span
                 aria-hidden="true"
-                className="h-2 w-2 rounded-full bg-saffron-500"
+                className="h-2 w-2 rounded-full bg-iris-500"
               />
               Planned
             </span>
           )}
           <span className="inline-flex items-center gap-2 text-xs text-ink-600">
-            <span aria-hidden="true" className="h-px w-5 bg-saffron-500/70" />
+            <span aria-hidden="true" className="h-px w-5 bg-iris-500/70" />
             Tour route
           </span>
         </div>
@@ -351,7 +351,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 aria-hidden="true"
-                className="mt-0.5 h-4 w-4 shrink-0 text-saffron-600"
+                className="mt-0.5 h-4 w-4 shrink-0 text-iris-600"
               >
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
                 <circle cx="12" cy="10" r="3" />
@@ -408,7 +408,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
                         className="group flex items-center justify-between gap-4 py-3.5"
                       >
                         <span>
-                          <span className="block text-sm font-semibold text-ink-950 transition group-hover:text-saffron-600">
+                          <span className="block text-sm font-semibold text-ink-950 transition group-hover:text-iris-600">
                             {ev.title}
                           </span>
                           <span className="mt-0.5 block text-xs text-ink-600">
@@ -423,7 +423,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           aria-hidden="true"
-                          className="h-4 w-4 shrink-0 text-ink-400 transition group-hover:translate-x-1 group-hover:text-saffron-600"
+                          className="h-4 w-4 shrink-0 text-ink-400 transition group-hover:translate-x-1 group-hover:text-iris-600"
                         >
                           <path d="M5 12h14" />
                           <path d="m13 6 6 6-6 6" />

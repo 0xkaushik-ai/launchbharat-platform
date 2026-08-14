@@ -31,10 +31,10 @@ function ArchetypeMark() {
         d="M8 88 A80 80 0 0 1 88 8"
         stroke="currentColor"
         strokeWidth={1}
-        className="text-saffron-600/40"
+        className="text-iris-600/40"
       />
       {/* node dots along the arc */}
-      <g className="text-saffron-600/50" fill="currentColor">
+      <g className="text-iris-600/50" fill="currentColor">
         <circle cx="8" cy="88" r="1.6" />
         <circle cx="31.4" cy="31.4" r="1.6" />
         <circle cx="88" cy="8" r="1.6" />
@@ -54,7 +54,7 @@ function MentorPlate({ mentor, index }: { mentor: Mentor; index: number }) {
     <GlowCard className="card-hover h-full rounded-2xl border border-line bg-white">
       <article className="flex h-full flex-col overflow-hidden rounded-2xl p-3">
         {/* Avatar area — archetype treatment until the profile is confirmed */}
-        <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-saffron-500 via-white to-green-500">
+        <div className="relative flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-cyan-400 via-iris-400 to-orchid-400">
           <ArchetypeMark />
           <span
             aria-hidden="true"
@@ -62,7 +62,7 @@ function MentorPlate({ mentor, index }: { mentor: Mentor; index: number }) {
           >
             {String(index + 1).padStart(2, "0")}
           </span>
-          <span className="relative px-4 text-center font-display text-lg font-semibold text-saffron-600">
+          <span className="relative px-4 text-center font-display text-lg font-semibold text-iris-600">
             {mentor.designation}
           </span>
         </div>
@@ -88,7 +88,7 @@ function MentorPlate({ mentor, index }: { mentor: Mentor; index: number }) {
               <span className="inline-flex items-center gap-2 font-mono text-[11px] font-medium uppercase tracking-wider text-ink-400">
                 <span
                   aria-hidden="true"
-                  className="h-1.5 w-1.5 rounded-full bg-saffron-500 animate-pulse-dot"
+                  className="h-1.5 w-1.5 rounded-full bg-iris-500 animate-pulse-dot"
                 />
                 To be announced
               </span>
@@ -116,7 +116,7 @@ export default function Mentors() {
           title={
             <>
               Learn from those who{" "}
-              <span className="text-saffron-600">built</span> before you.
+              <span className="text-gradient-brand">built</span> before you.
             </>
           }
           lede="Direct access to founders, investors, industry leaders and academics — the people who have taken ideas from a first sketch to a working company, mentoring every stage of the journey."

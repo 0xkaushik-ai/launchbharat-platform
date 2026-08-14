@@ -51,21 +51,13 @@ export default function ContactPage() {
         aria-labelledby="contact-hero-heading"
         className="relative overflow-hidden bg-slate-50 py-16 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <div className="flex max-w-3xl flex-col items-start gap-5">
             <Eyebrow>Contact</Eyebrow>
             <h1 id="contact-hero-heading" className="display-lg text-ink-950">
               Contact the{" "}
-              <span className="text-saffron-600">movement</span>.
+              <span className="text-gradient-brand">movement</span>.
             </h1>
             <p className="lede">
               One team coordinates the movement nationally. Tell us who you are
@@ -101,7 +93,7 @@ export default function ContactPage() {
                   <p className="leading-relaxed text-ink-800">{a.text}</p>
                   <a
                     href={`mailto:${email}?subject=${encodeURIComponent(a.subject)}`}
-                    className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                    className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-iris-600 underline-offset-4 hover:underline"
                   >
                     {a.linkLabel}
                     <svg
@@ -138,7 +130,7 @@ export default function ContactPage() {
                 title={
                   <>
                     Reach us{" "}
-                    <span className="text-green-700">directly</span>.
+                    <span className="text-gradient-brand">directly</span>.
                   </>
                 }
               />
@@ -150,7 +142,7 @@ export default function ContactPage() {
                   <dd className="mt-1">
                     <a
                       href={`mailto:${email}`}
-                      className="font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                      className="font-semibold text-iris-600 underline-offset-4 hover:underline"
                     >
                       {email}
                     </a>

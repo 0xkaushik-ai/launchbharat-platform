@@ -20,7 +20,7 @@ export default function Journey() {
             title={
               <>
                 Six stages. One{" "}
-                <span className="text-saffron-600">national stage</span>.
+                <span className="text-gradient-brand">national stage</span>.
               </>
             }
             lede="A structured route from the first spark of an idea to the national stage — each stage designed to move participants forward."
@@ -31,12 +31,12 @@ export default function Journey() {
           {/* Mobile: vertical gradient rail through the nodes */}
           <span
             aria-hidden="true"
-            className="absolute bottom-8 left-4 top-4 w-px bg-gradient-to-b from-saffron-500 via-white to-green-500 lg:hidden"
+            className="absolute bottom-8 left-4 top-4 w-px bg-gradient-to-b from-cyan-400 via-iris-400 to-orchid-400 lg:hidden"
           />
           {/* Desktop: horizontal gradient rail through the nodes */}
           <span
             aria-hidden="true"
-            className="absolute left-[8.33%] right-[8.33%] top-4 hidden h-px bg-gradient-to-r from-saffron-500 via-white to-green-500 lg:block"
+            className="absolute left-[8.33%] right-[8.33%] top-4 hidden h-px bg-gradient-to-r from-cyan-400 via-iris-400 to-orchid-400 lg:block"
           />
 
           {steps.map((step, i) => {
@@ -52,7 +52,7 @@ export default function Journey() {
                     aria-hidden="true"
                     className={`absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full font-mono text-[11px] font-semibold tabular-nums lg:static lg:mb-6 ${
                       isLast
-                        ? "bg-gradient-to-br from-saffron-500 via-white to-green-500 text-ink-950 shadow-[0_10px_24px_-8px_rgba(234,124,12,0.65)]"
+                        ? "bg-gradient-to-br from-cyan-400 via-iris-400 to-orchid-400 text-ink-950 shadow-[0_10px_24px_-8px_rgba(234,124,12,0.65)]"
                         : "border border-line bg-white text-ink-400 shadow-sm"
                     }`}
                   >
@@ -76,7 +76,7 @@ export default function Journey() {
                     {isLast && (
                       <Link
                         href="/grand-finale"
-                        className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-saffron-600 transition hover:text-saffron-600"
+                        className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-iris-600 transition hover:text-iris-600"
                       >
                         The Grand Finale
                         <svg

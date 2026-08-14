@@ -17,7 +17,7 @@ export default async function ProfileSettingsPage() {
       <p className="chip-mono">Applicant portal</p>
       <h1 className="display-md mt-3 text-ink-950">My profile</h1>
       <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-600">Keep these contact details current so the team can reach you about your application and future opportunities.</p>
-      <section className="mt-8 rounded-2xl border border-line bg-white p-6 shadow-sm sm:p-8"><ProfileForm profile={profile} /></section>
+      <section className="surface mt-8 p-6 sm:p-8"><ProfileForm profile={profile} /></section>
     </main>
   );
 }

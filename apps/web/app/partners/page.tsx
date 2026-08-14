@@ -51,7 +51,7 @@ function SlotGrid({ category }: { category: PartnerCategory }) {
       {Array.from({ length: openSlots }).map((_, i) => (
         <li
           key={i}
-          className="flex aspect-[3/2] items-center justify-center rounded-xl border border-dashed border-saffron-500/50 bg-white/70"
+          className="flex aspect-[3/2] items-center justify-center rounded-xl border border-dashed border-iris-400/50 bg-white/70"
         >
           <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400">
             Partner slot
@@ -72,25 +72,14 @@ export default function PartnersPage() {
         aria-labelledby="partners-hero-heading"
         className="relative overflow-hidden bg-white py-16 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 420, height: 420, top: -160, left: -140 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 380, height: 380, bottom: -180, right: -120 }}
-        />
-
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <Eyebrow>Partners</Eyebrow>
           <h1
             id="partners-hero-heading"
             className="display-lg mt-5 max-w-4xl text-ink-950"
           >
-            The <span className="text-saffron-600">ecosystem</span> behind
+            The <span className="text-gradient-brand">ecosystem</span> behind
             the movement.
           </h1>
           <p className="lede mt-5 max-w-2xl">
@@ -105,7 +94,7 @@ export default function PartnersPage() {
                 <li key={category.id}>
                   <a
                     href={`#${category.id}`}
-                    className="inline-block rounded-full border border-line bg-white/70 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink-600 backdrop-blur transition-colors hover:border-saffron-500 hover:text-saffron-600"
+                    className="inline-block rounded-full border border-line bg-white/70 px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-ink-600 backdrop-blur transition-colors hover:border-iris-400 hover:text-iris-600"
                   >
                     {category.category}
                   </a>
@@ -151,7 +140,7 @@ export default function PartnersPage() {
                     {category.description}
                   </p>
                   {CATEGORY_ROLES[category.id] && (
-                    <p className="mt-5 max-w-md border-l-2 border-saffron-500/60 pl-4 text-sm leading-relaxed text-ink-600">
+                    <p className="mt-5 max-w-md border-l-2 border-iris-400/60 pl-4 text-sm leading-relaxed text-ink-600">
                       {CATEGORY_ROLES[category.id]}
                     </p>
                   )}
@@ -172,18 +161,12 @@ export default function PartnersPage() {
         aria-labelledby="become-partner-heading"
         className="section-pad relative overflow-hidden border-t border-line bg-mist"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 400, height: 400, top: -140, right: -120 }}
-        />
 
         <Container className="relative text-center">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-6">
             <div className="tricolor-rule w-20" aria-hidden="true" />
             <h2 id="become-partner-heading" className="display-md text-ink-950">
-              Become a <span className="text-saffron-600">partner</span>.
+              Become a <span className="text-gradient-brand">partner</span>.
             </h2>
             <p className="max-w-xl text-base leading-relaxed text-ink-800">
               Whether you run an incubator, an investment fund, a company or a

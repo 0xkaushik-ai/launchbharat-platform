@@ -24,17 +24,9 @@ export default function RegisterPage() {
       {/* Left rail — light lilac, sticky on large screens */}
       <section
         aria-labelledby="register-hero-heading"
-        className="relative overflow-hidden bg-slate-50 lg:col-span-5"
+        className="relative overflow-hidden bg-mist lg:col-span-5"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
 
         <div className="relative h-full px-5 py-14 sm:px-8 lg:px-12 lg:py-24 xl:px-16">
           <div className="mx-auto flex max-w-xl flex-col items-start lg:sticky lg:top-24 lg:mx-0">
@@ -43,7 +35,7 @@ export default function RegisterPage() {
               id="register-hero-heading"
               className="display-lg mt-5 text-ink-950"
             >
-              Join the <span className="text-saffron-600">movement</span>.
+              Join the <span className="text-gradient-brand">movement</span>.
             </h1>
             <p className="lede mt-5">
               One application places you inside a nationwide journey — from
@@ -64,7 +56,7 @@ export default function RegisterPage() {
                   >
                     <span
                       aria-hidden="true"
-                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-saffron-600 font-mono text-[10px] font-bold tabular-nums text-white"
+                      className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-iris-600 font-mono text-[10px] font-bold tabular-nums text-white"
                     >
                       {stage.number}
                     </span>

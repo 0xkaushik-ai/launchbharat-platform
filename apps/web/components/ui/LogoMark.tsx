@@ -10,10 +10,10 @@ export default function LogoMark({
   withTagline?: boolean;
   className?: string;
 }) {
-  const heightClass = size === "sm" ? "h-6" : size === "md" ? "h-10" : "h-14";
-  
+  const heightClass = size === "sm" ? "h-7" : size === "md" ? "h-10" : "h-12";
+
   return (
-    <div className={`inline-flex items-center rounded bg-white p-1.5 ${className}`}>
+    <div className={`inline-flex items-center ${className}`}>
       <Image
         src="/logo.jpg"
         alt={site.name}

@@ -70,7 +70,7 @@ export default function TerminalCard({
       <div className="flex items-center gap-2 border-b border-white/10 bg-white/5 px-4 py-2.5">
         <span aria-hidden="true" className="flex gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-blue-800/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-saffron-500/80" />
+          <span className="h-2.5 w-2.5 rounded-full bg-iris-500/80" />
           <span className="h-2.5 w-2.5 rounded-full bg-green-500/80" />
         </span>
         <span className="ml-2 text-[10px] uppercase tracking-[0.18em] text-slate-400">

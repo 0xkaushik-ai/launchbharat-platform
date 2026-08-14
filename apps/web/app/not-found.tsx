@@ -6,15 +6,6 @@ export default function NotFound() {
       aria-labelledby="not-found-heading"
       className="relative flex min-h-[80vh] items-center overflow-hidden bg-slate-50 py-24"
     >
-      <div aria-hidden="true" className="hidden" />
-      <div
-        aria-hidden="true"
-        className="hidden"
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
-      />
       <span
         aria-hidden="true"
         className="text-outline pointer-events-none absolute top-1/2 right-[2%] -translate-y-1/2 font-display text-[clamp(11rem,30vw,24rem)] leading-none font-bold select-none"
@@ -25,7 +16,7 @@ export default function NotFound() {
         <div className="flex max-w-3xl flex-col items-start gap-6">
           <Eyebrow>Error 404</Eyebrow>
           <h1 id="not-found-heading" className="display-xl text-ink-950">
-            Off the <span className="text-saffron-600">map</span>.
+            Off the <span className="text-gradient-brand">map</span>.
           </h1>
           <p className="lede">
             This page isn&apos;t part of the movement yet.

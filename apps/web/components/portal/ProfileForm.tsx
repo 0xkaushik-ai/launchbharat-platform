@@ -39,7 +39,7 @@ export default function ProfileForm({ profile }: { profile: Profile | null }) {
     setSaving(false);
   }
 
-  const inputClass = "mt-2 w-full rounded-lg border border-line px-3 py-2.5 text-ink-950 outline-none transition focus:border-saffron-500 focus:ring-2 focus:ring-saffron-100";
+  const inputClass = "field-input mt-2";
   return (
     <form className="mt-7 grid gap-5 sm:grid-cols-2" onSubmit={submit}>
       <label className="block text-sm font-medium text-ink-800 sm:col-span-2">Full name<input required value={values.full_name} onChange={(e) => setValues({ ...values, full_name: e.target.value })} autoComplete="name" className={inputClass} /></label>
@@ -49,7 +49,7 @@ export default function ProfileForm({ profile }: { profile: Profile | null }) {
       <label className="block text-sm font-medium text-ink-800">City<input value={values.city} onChange={(e) => setValues({ ...values, city: e.target.value })} autoComplete="address-level2" className={inputClass} /></label>
       <label className="block text-sm font-medium text-ink-800 sm:col-span-2">College or organisation<input value={values.college} onChange={(e) => setValues({ ...values, college: e.target.value })} className={inputClass} /></label>
       <div className="sm:col-span-2 flex flex-wrap items-center gap-4 border-t border-line pt-5">
-        <button disabled={saving} className="rounded-full bg-saffron-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-saffron-700 disabled:opacity-60">{saving ? "Saving…" : "Save profile"}</button>
+        <button disabled={saving} className="rounded-full btn-brand px-5 py-3 text-sm font-semibold transition disabled:opacity-60">{saving ? "Saving…" : "Save profile"}</button>
         {message && <p role="status" className="text-sm text-ink-600">{message}</p>}
       </div>
     </form>

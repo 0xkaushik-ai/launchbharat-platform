@@ -14,16 +14,6 @@ export default function EventsPreview() {
       aria-labelledby="events-preview-heading"
       className="section-pad relative overflow-hidden bg-paper"
     >
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 420, height: 420, top: -180, right: -140 }}
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 360, height: 360, bottom: -200, left: -160 }}
-      />
       <Container className="relative">
         <SectionHeading
           id="events-preview-heading"
@@ -32,7 +22,7 @@ export default function EventsPreview() {
           title={
             <>
               Where the movement{" "}
-              <span className="text-saffron-600">meets you.</span>
+              <span className="text-gradient-brand">meets you.</span>
             </>
           }
           lede="Roadshows, bootcamps, pitch days and forums — the national calendar travels city to city, and online."

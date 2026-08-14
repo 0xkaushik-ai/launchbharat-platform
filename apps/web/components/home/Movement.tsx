@@ -43,7 +43,7 @@ function ArrowBullet() {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="mt-0.5 h-4 w-4 shrink-0 text-saffron-600"
+      className="mt-0.5 h-4 w-4 shrink-0 text-iris-600"
       fill="none"
       stroke="currentColor"
       strokeWidth={1.5}
@@ -87,7 +87,7 @@ export default function Movement() {
               title={
                 <>
                   More than an{" "}
-                  <span className="text-saffron-600">event</span>.
+                  <span className="text-gradient-brand">event</span>.
                 </>
               }
               lede="It is a movement designed to bring India's startup ecosystem closer to the campus."
@@ -138,15 +138,6 @@ export default function Movement() {
 
           {/* Map panel with the terminal card tucked beneath it */}
           <Reveal delay={1} className="relative">
-            <div
-              aria-hidden="true"
-              className="hidden"
-            />
-            <div
-              aria-hidden="true"
-              className="hidden"
-              style={{ width: 280, height: 280, top: -70, right: -70 }}
-            />
 
             <div className="glass corner-frame relative rounded-3xl p-6 pt-14 sm:p-10 sm:pt-16">
               <span

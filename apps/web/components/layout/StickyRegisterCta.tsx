@@ -26,7 +26,7 @@ export default function StickyRegisterCta() {
       }`}
     >
       <Button href="/register" variant="primary" size="md" className="w-full">
-        Register Now
+        Register now
       </Button>
     </div>
   );

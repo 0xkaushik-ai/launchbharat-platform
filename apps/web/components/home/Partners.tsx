@@ -30,7 +30,7 @@ function SlotStrip({ category }: { category: PartnerCategory }) {
       {Array.from({ length: openSlots }).map((_, i) => (
         <li
           key={i}
-          className="flex aspect-[3/2] items-center justify-center rounded-xl border border-dashed border-saffron-500/50 bg-white/70"
+          className="flex aspect-[3/2] items-center justify-center rounded-xl border border-dashed border-iris-400/50 bg-white/70"
         >
           <span className="font-mono text-[9px] uppercase tracking-[0.18em] text-ink-400">
             Partner slot
@@ -58,7 +58,7 @@ export default function Partners() {
           eyebrow="Ecosystem partners"
           title={
             <>
-              The <span className="text-saffron-600">ecosystem</span> behind
+              The <span className="text-gradient-brand">ecosystem</span> behind
               the movement.
             </>
           }

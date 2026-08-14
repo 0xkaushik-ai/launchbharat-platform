@@ -45,20 +45,12 @@ export default function MediaPage() {
         aria-labelledby="media-hero-heading"
         className="relative overflow-hidden bg-white pb-20 pt-24 md:pb-24 md:pt-32"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div aria-hidden="true" className="grid-texture absolute inset-0" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
+        <div aria-hidden="true" className="grid-texture pointer-events-none absolute inset-0 opacity-50" />
         <Container className="relative">
           <Eyebrow>Newsroom</Eyebrow>
           <h1 id="media-hero-heading" className="display-xl mt-6 text-ink-950">
-            Media <span className="text-saffron-600">centre</span>.
+            Media <span className="text-gradient-brand">centre</span>.
           </h1>
           <p className="lede mt-6 max-w-2xl">
             Press releases, announcements and resources from the movement.
@@ -81,7 +73,7 @@ export default function MediaPage() {
               title={
                 <>
                   Releases &{" "}
-                  <span className="text-green-700">announcements</span>.
+                  <span className="text-gradient-brand">announcements</span>.
                 </>
               }
               lede="Every official statement from the movement, searchable in one place."
@@ -107,7 +99,7 @@ export default function MediaPage() {
               title={
                 <>
                   Downloads &{" "}
-                  <span className="text-saffron-600">media kit</span>.
+                  <span className="text-gradient-brand">media kit</span>.
                 </>
               }
               lede="Official assets and reference documents for journalists, institutions and partners."
@@ -126,7 +118,7 @@ export default function MediaPage() {
                     <span
                       aria-hidden="true"
                       className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-green-500/20 via-white/25 to-green-500/25 ${
-                        dl.available ? "text-saffron-600" : "text-ink-400"
+                        dl.available ? "text-iris-600" : "text-ink-400"
                       }`}
                     >
                       <DocumentIcon />
@@ -159,7 +151,7 @@ export default function MediaPage() {
               >
                 <h3
                   id="media-enquiries-heading"
-                  className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-saffron-600"
+                  className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-iris-600"
                 >
                   Media enquiries
                 </h3>
@@ -169,7 +161,7 @@ export default function MediaPage() {
                 </p>
                 <a
                   href={`mailto:${site.contact.email}`}
-                  className="mt-5 inline-block text-sm font-semibold text-ink-950 underline decoration-iris-400 decoration-2 underline-offset-4 transition duration-200 hover:text-saffron-600"
+                  className="mt-5 inline-block text-sm font-semibold text-ink-950 underline decoration-iris-400 decoration-2 underline-offset-4 transition duration-200 hover:text-iris-600"
                 >
                   {site.contact.email}
                 </a>
@@ -195,7 +187,7 @@ export default function MediaPage() {
           <div>
             <h2
               id="media-galleries-heading"
-              className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-saffron-600"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-iris-600"
             >
               Photographs & video
             </h2>

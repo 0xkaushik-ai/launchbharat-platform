@@ -29,7 +29,7 @@ export function StageBeams({ className = "" }: { className?: string }) {
         <line x1="200" y1="384" x2="1000" y2="384" className="text-blue-800/15" />
       </g>
       {/* single iris accent beam + stage point */}
-      <g className="text-saffron-600/60" stroke="currentColor" strokeWidth="1">
+      <g className="text-iris-600/60" stroke="currentColor" strokeWidth="1">
         <line x1="600" y1="320" x2="600" y2="0" />
       </g>
       {/* slow pulse on the center beam — cap + stage point */}
@@ -104,15 +104,15 @@ export function FinaleMeta({ className = "" }: { className?: string }) {
       label: gf.dateConfirmed
         ? gf.dateDisplay
         : `${gf.dateDisplay} (to be confirmed)`,
-      icon: <CalendarIcon className="h-4 w-4 shrink-0 text-saffron-600/80" />,
+      icon: <CalendarIcon className="h-4 w-4 shrink-0 text-iris-600/80" />,
     },
     {
       label: gf.venue,
-      icon: <VenueIcon className="h-4 w-4 shrink-0 text-saffron-600/80" />,
+      icon: <VenueIcon className="h-4 w-4 shrink-0 text-iris-600/80" />,
     },
     {
       label: gf.city,
-      icon: <PinIcon className="h-4 w-4 shrink-0 text-saffron-600/80" />,
+      icon: <PinIcon className="h-4 w-4 shrink-0 text-iris-600/80" />,
     },
   ];
   return (
@@ -142,17 +142,6 @@ export default function GrandFinale() {
       className="relative overflow-hidden bg-slate-50"
     >
       {/* soft aurora backdrop + ambient orbs */}
-      <div aria-hidden="true" className="hidden" />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 460, height: 460, top: -140, left: -160 }}
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 400, height: 400, bottom: -140, right: -120 }}
-      />
 
       <div className="section-pad relative">
         <Container>
@@ -164,9 +153,9 @@ export default function GrandFinale() {
               title={
                 <>
                   The Grand{" "}
-                  <span className="text-green-700">Finale.</span>
+                  <span className="text-gradient-brand">Finale.</span>
                   <span className="display-md mt-4 block">
-                    <span className="text-saffron-600">
+                    <span className="text-gradient-brand">
                       From ideas to impact.
                     </span>
                   </span>

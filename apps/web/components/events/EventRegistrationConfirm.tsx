@@ -38,14 +38,14 @@ export default function EventRegistrationConfirm({ eventId, eventTitle, details 
   if (result) {
     const waitlisted = result.status === "waitlisted";
     return (
-      <section className="rounded-2xl border border-line bg-white p-6 shadow-sm sm:p-8">
+      <section className="surface p-6 sm:p-8">
         <p className="chip-mono">{waitlisted ? "Waitlist confirmed" : "Registration confirmed"}</p>
         <h1 className="display-sm mt-3 text-ink-950">{waitlisted ? "You’re on the waitlist." : result.alreadyRegistered ? "You’re already registered." : "Your place is reserved."}</h1>
         <p className="mt-3 text-sm leading-relaxed text-ink-600">
           {waitlisted ? `We will contact you if a place opens for ${eventTitle}.` : `Your ${eventTitle} ticket is now available in your applicant portal.`}
         </p>
         {result.ticketCode && <p className="mt-6 rounded-xl bg-slate-50 px-4 py-3 font-mono text-sm font-semibold tracking-wide text-ink-950">Ticket {result.ticketCode}</p>}
-        <Link href="/portal" className="mt-7 inline-flex rounded-full bg-saffron-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-saffron-700">View my portal</Link>
+        <Link href="/portal" className="mt-7 inline-flex rounded-full btn-brand px-5 py-3 text-sm font-semibold transition">View my portal</Link>
       </section>
     );
   }
@@ -66,13 +66,13 @@ export default function EventRegistrationConfirm({ eventId, eventTitle, details 
       <dl className="mt-7 divide-y divide-line rounded-xl border border-line">
         {rows.map(([label, value]) => <div key={label} className="flex flex-col gap-1 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:gap-6"><dt className="text-sm text-ink-500">{label}</dt><dd className="text-sm font-medium text-ink-950">{value}</dd></div>)}
       </dl>
-      <Link href="/portal/settings" className="mt-4 inline-flex text-sm font-semibold text-saffron-600 hover:text-saffron-700">Update my profile</Link>
+      <Link href="/portal/settings" className="mt-4 inline-flex text-sm font-semibold text-iris-600 hover:text-iris-500">Update my profile</Link>
       <label className="mt-7 flex items-start gap-3 text-sm leading-relaxed text-ink-700">
-        <input checked={confirmed} onChange={(event) => setConfirmed(event.target.checked)} type="checkbox" className="mt-1 h-4 w-4 rounded border-line text-saffron-600 focus:ring-saffron-500" />
+        <input checked={confirmed} onChange={(event) => setConfirmed(event.target.checked)} type="checkbox" className="mt-1 h-4 w-4 rounded border-line text-iris-600 focus:ring-iris-500" />
         <span>I confirm that these details are correct and I want to register for this event.</span>
       </label>
       {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-      <button type="button" disabled={!confirmed || submitting} onClick={register} className="mt-6 rounded-full bg-saffron-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-saffron-700 disabled:cursor-not-allowed disabled:opacity-60">{submitting ? "Confirming…" : "Confirm free registration"}</button>
+      <button type="button" disabled={!confirmed || submitting} onClick={register} className="mt-6 rounded-full btn-brand px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60">{submitting ? "Confirming…" : "Confirm free registration"}</button>
     </section>
   );
 }

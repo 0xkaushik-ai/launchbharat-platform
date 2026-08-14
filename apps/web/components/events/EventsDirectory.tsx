@@ -14,7 +14,7 @@ const STATUS_TABS: { value: StatusFilter; label: string }[] = [
 ];
 
 const selectCls =
-  "rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition-colors duration-200 hover:border-saffron-500 focus:border-saffron-500 focus:outline-none";
+  "rounded-full border border-line bg-white px-4 py-2 text-sm text-ink-800 transition-colors duration-200 hover:border-iris-400 focus:border-iris-500 focus:outline-none";
 
 type DatabaseEvent = {
   id: string; slug: string; title: string; city: string | null; state: string | null;
@@ -139,8 +139,8 @@ export default function EventsDirectory({ events: initialEvents }: { events: LbE
                 onClick={() => setStatus(tab.value)}
                 className={`rounded-full px-4 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition duration-200 ${
                   active
-                    ? "neo-border [--neo-bg:var(--color-saffron-100)] text-saffron-600 shadow-[0_6px_18px_-8px_rgb(139_92_246/0.45)]"
-                    : "border border-line bg-white text-ink-600 hover:border-saffron-500 hover:text-ink-950"
+                    ? "neo-border [--neo-bg:var(--color-iris-100)] text-iris-600 shadow-[0_6px_18px_-8px_rgb(139_92_246/0.45)]"
+                    : "border border-line bg-white text-ink-600 hover:border-iris-400 hover:text-ink-950"
                 }`}
               >
                 {tab.label}
@@ -223,7 +223,7 @@ export default function EventsDirectory({ events: initialEvents }: { events: LbE
               <button
                 onClick={loadMore}
                 disabled={loading}
-                className="rounded-full bg-slate-900 px-6 py-2.5 text-sm font-medium text-white transition-colors hover:bg-slate-800 disabled:opacity-50"
+                className="btn-brand rounded-full px-6 py-2.5 text-sm font-medium disabled:opacity-50"
               >
                 {loading ? "Loading..." : "Load Next Events"}
               </button>

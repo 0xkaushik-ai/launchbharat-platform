@@ -36,21 +36,13 @@ export default function FaqPage() {
         aria-labelledby="faq-hero-heading"
         className="relative overflow-hidden bg-slate-50 py-16 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <div className="flex max-w-3xl flex-col items-start gap-5">
             <Eyebrow>Questions</Eyebrow>
             <h1 id="faq-hero-heading" className="display-lg text-ink-950">
               Frequently asked{" "}
-              <span className="text-saffron-600">questions</span>.
+              <span className="text-gradient-brand">questions</span>.
             </h1>
             <p className="lede">
               Straight answers on participating, hosting and partnering — before
@@ -70,7 +62,7 @@ export default function FaqPage() {
             <div className="divide-y divide-line border-y border-line">
               {faq.map((item, i) => (
                 <details key={i} className="group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left font-semibold text-ink-950 transition-colors hover:text-saffron-600 [&::-webkit-details-marker]:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left font-semibold text-ink-950 transition-colors hover:text-iris-600 [&::-webkit-details-marker]:hidden">
                     <span>{item.q}</span>
                     <svg
                       aria-hidden="true"
@@ -78,7 +70,7 @@ export default function FaqPage() {
                       fill="none"
                       stroke="currentColor"
                       strokeWidth={1.5}
-                      className="h-5 w-5 shrink-0 text-saffron-600 transition-transform duration-200 group-open:rotate-180"
+                      className="h-5 w-5 shrink-0 text-iris-600 transition-transform duration-200 group-open:rotate-180"
                     >
                       <path
                         d="m6 9 6 6 6-6"
@@ -99,14 +91,14 @@ export default function FaqPage() {
                 href={`mailto:${site.contact.email}?subject=${encodeURIComponent(
                   "Question — LaunchBharat",
                 )}`}
-                className="font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                className="font-semibold text-iris-600 underline-offset-4 hover:underline"
               >
                 {site.contact.email}
               </a>{" "}
               or visit the{" "}
               <Link
                 href="/contact"
-                className="font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                className="font-semibold text-iris-600 underline-offset-4 hover:underline"
               >
                 contact page
               </Link>

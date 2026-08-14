@@ -11,7 +11,7 @@ function StoryArc({ story }: { story: Story }) {
   return (
     <GlowCard className="glass glass-hover h-full rounded-3xl">
       <article className="flex h-full flex-col p-8">
-        <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-saffron-600">
+        <h3 className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-iris-600">
           {story.persona}
         </h3>
         <div className="mt-3">
@@ -22,13 +22,13 @@ function StoryArc({ story }: { story: Story }) {
         <ol className="relative mt-8 flex flex-1 flex-col gap-8">
           <span
             aria-hidden="true"
-            className="absolute bottom-4 left-[3.5px] top-3 w-px bg-gradient-to-b from-saffron-500 via-white to-green-500"
+            className="absolute bottom-4 left-[3.5px] top-3 w-px bg-gradient-to-b from-cyan-400 via-iris-400 to-orchid-400"
           />
           {story.stages.map((stage) => (
             <li key={stage.stage} className="relative pl-7">
               <span
                 aria-hidden="true"
-                className="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-gradient-to-br from-saffron-500 to-green-500 shadow-[0_0_8px_rgba(234,124,12,0.45)]"
+                className="absolute left-0 top-1.5 h-2 w-2 rounded-full bg-gradient-to-br from-cyan-400 to-orchid-400 shadow-[0_0_8px_rgba(234,124,12,0.45)]"
               />
               <p className="font-mono text-[10px] font-medium uppercase tracking-[0.2em] text-ink-400">
                 {stage.stage}
@@ -55,17 +55,6 @@ export default function Stories() {
       aria-labelledby="stories-heading"
       className="section-pad relative overflow-hidden bg-slate-50"
     >
-      <div aria-hidden="true" className="hidden" />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 460, height: 460, top: -160, right: -140 }}
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 380, height: 380, bottom: -160, left: -120 }}
-      />
 
       <Container className="relative">
         <SectionHeading
@@ -75,7 +64,7 @@ export default function Stories() {
           title={
             <>
               The ideas that could shape{" "}
-              <span className="text-saffron-600">tomorrow</span>.
+              <span className="text-gradient-brand">tomorrow</span>.
             </>
           }
           lede="The journeys this movement is built to create."

@@ -48,7 +48,7 @@ function TickIcon() {
       strokeLinecap="round"
       strokeLinejoin="round"
       aria-hidden="true"
-      className="mt-0.5 h-5 w-5 shrink-0 text-saffron-600"
+      className="mt-0.5 h-5 w-5 shrink-0 text-iris-600"
     >
       <path d="M5 12.5 10 17.5 19 7" />
     </svg>
@@ -165,12 +165,6 @@ export default async function EventDetailPage({
         aria-labelledby="event-detail-heading"
         className="relative overflow-hidden bg-slate-50 py-16 md:py-20"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 420, height: 420, top: -160, right: -120 }}
-        />
         <Container className="relative">
           <div className="flex flex-wrap items-center gap-2">
             <Badge tone="iris">{event.category}</Badge>
@@ -205,7 +199,7 @@ export default async function EventDetailPage({
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_360px] lg:gap-20">
             <div>
               <h2 className="display-md text-ink-950">
-                About the <span className="text-green-700">event.</span>
+                About the <span className="text-gradient-brand">event.</span>
               </h2>
               <div className="mt-6 flex flex-col gap-5">
                 {paragraphs.map((p, i) => (
@@ -240,7 +234,7 @@ export default async function EventDetailPage({
                     <span className="font-mono text-4xl font-bold tabular-nums tracking-tight text-ink-950">
                       {plate.day}
                     </span>
-                    <span className="mt-2 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-saffron-600">
+                    <span className="mt-2 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-iris-600">
                       {plate.monthYear}
                     </span>
                   </p>
@@ -303,7 +297,7 @@ export default async function EventDetailPage({
 
                 <Link
                   href="/events"
-                  className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-600 transition-colors duration-200 hover:text-saffron-600"
+                  className="mt-6 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-600 transition-colors duration-200 hover:text-iris-600"
                 >
                   <ArrowLeftIcon />
                   All events

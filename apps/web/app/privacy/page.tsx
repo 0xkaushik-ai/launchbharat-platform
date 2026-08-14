@@ -19,16 +19,11 @@ export default function PrivacyPage() {
         aria-labelledby="privacy-hero-heading"
         className="relative overflow-hidden bg-slate-50 py-16 md:py-20"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
         <Container className="relative">
           <div className="flex max-w-3xl flex-col items-start gap-5">
             <Eyebrow>Legal</Eyebrow>
             <h1 id="privacy-hero-heading" className="display-lg text-ink-950">
-              <span className="text-saffron-600">Privacy</span> policy.
+              <span className="text-gradient-brand">Privacy</span> policy.
             </h1>
           </div>
         </Container>
@@ -178,7 +173,7 @@ export default function PrivacyPage() {
                   should be sent to{" "}
                   <a
                     href={`mailto:${site.contact.email}?subject=${encodeURIComponent("Privacy — LaunchBharat")}`}
-                    className="font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                    className="font-semibold text-iris-600 underline-offset-4 hover:underline"
                   >
                     {site.contact.email}
                   </a>{" "}

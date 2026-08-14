@@ -35,7 +35,7 @@ export default function WhoShouldJoin() {
           eyebrow="Who Should Join"
           title={
             <>
-              If you have <span className="text-saffron-600">an idea</span>,
+              If you have <span className="text-gradient-brand">an idea</span>,
               you have a place here.
             </>
           }
@@ -84,7 +84,7 @@ export default function WhoShouldJoin() {
                   <div className="mt-6 flex flex-1 items-end border-t border-line pt-4">
                     <Link
                       href={hrefFor(item.id)}
-                      className="group inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-ink-600 transition-colors hover:text-saffron-600"
+                      className="group inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-ink-600 transition-colors hover:text-iris-600"
                     >
                       How you take part
                       <svg

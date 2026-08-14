@@ -18,23 +18,13 @@ export default function MovementPage() {
         aria-labelledby="movement-hero-heading"
         className="relative overflow-hidden bg-white py-20 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 460, height: 460, top: -160, right: -120 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 380, height: 380, bottom: -200, left: -120 }}
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <div className="flex max-w-3xl flex-col items-start gap-5">
             <Eyebrow>The Movement</Eyebrow>
             <h1 id="movement-hero-heading" className="display-lg text-ink-950">
               More than an event. A{" "}
-              <span className="text-saffron-600">national movement</span>.
+              <span className="text-gradient-brand">national movement</span>.
             </h1>
             <p className="lede">
               LaunchBharat brings India&apos;s startup ecosystem closer to the
@@ -59,17 +49,6 @@ export default function MovementPage() {
         aria-labelledby="movement-cta-heading"
         className="section-pad relative overflow-hidden bg-slate-50"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 440, height: 440, top: -180, left: "12%" }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 400, height: 400, bottom: -200, right: "8%" }}
-        />
         <Container className="relative">
           <Reveal className="flex flex-col items-center gap-8 text-center">
             <h2
@@ -77,7 +56,7 @@ export default function MovementPage() {
               className="display-md max-w-2xl text-ink-950"
             >
               If you have an idea, you have{" "}
-              <span className="text-saffron-600">a place here</span>.
+              <span className="text-gradient-brand">a place here</span>.
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Button href="/register" variant="primary" size="lg">

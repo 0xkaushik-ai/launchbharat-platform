@@ -45,21 +45,13 @@ export default function AboutPage() {
         aria-labelledby="about-hero-heading"
         className="relative overflow-hidden bg-slate-50 py-20 md:py-28"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <div className="flex max-w-3xl flex-col items-start gap-5">
             <Eyebrow>About</Eyebrow>
             <h1 id="about-hero-heading" className="display-lg text-ink-950">
               A movement for India&apos;s{" "}
-              <span className="text-saffron-600">next founders</span>.
+              <span className="text-gradient-brand">next founders</span>.
             </h1>
             <p className="lede">{site.description}</p>
           </div>
@@ -79,7 +71,7 @@ export default function AboutPage() {
                 title={
                   <>
                     Bring the{" "}
-                    <span className="text-green-700">ecosystem</span> to the
+                    <span className="text-gradient-brand">ecosystem</span> to the
                     campus.
                   </>
                 }
@@ -138,7 +130,7 @@ export default function AboutPage() {
               title={
                 <>
                   What LaunchBharat{" "}
-                  <span className="text-saffron-600">is</span> — and what it
+                  <span className="text-gradient-brand">is</span> — and what it
                   is not.
                 </>
               }
@@ -222,7 +214,7 @@ export default function AboutPage() {
                 title={
                   <>
                     One journey,{" "}
-                    <span className="text-saffron-600">six stages</span>.
+                    <span className="text-gradient-brand">six stages</span>.
                   </>
                 }
               />
@@ -265,7 +257,7 @@ export default function AboutPage() {
               size="md"
               title={
                 <>
-                  Who is <span className="text-green-700">behind it</span>.
+                  Who is <span className="text-gradient-brand">behind it</span>.
                 </>
               }
             />
@@ -283,7 +275,7 @@ export default function AboutPage() {
                 confirmed, they are announced here and on the{" "}
                 <Link
                   href="/partners"
-                  className="font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                  className="font-semibold text-iris-600 underline-offset-4 hover:underline"
                 >
                   Partners
                 </Link>{" "}
@@ -299,11 +291,6 @@ export default function AboutPage() {
         aria-labelledby="about-involved-heading"
         className="section-pad relative overflow-hidden bg-slate-50"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
         <Container className="relative">
           <Reveal>
             <SectionHeading
@@ -314,7 +301,7 @@ export default function AboutPage() {
               title={
                 <>
                   The movement needs{" "}
-                  <span className="text-saffron-600">every role</span>.
+                  <span className="text-gradient-brand">every role</span>.
                 </>
               }
             />
@@ -348,7 +335,7 @@ export default function AboutPage() {
                         fill="none"
                         stroke="currentColor"
                         strokeWidth={1.5}
-                        className="h-5 w-5 shrink-0 text-saffron-600 transition group-hover:translate-x-1"
+                        className="h-5 w-5 shrink-0 text-iris-600 transition group-hover:translate-x-1"
                       >
                         <path
                           d="M5 12h14m0 0-6-6m6 6-6 6"

@@ -70,22 +70,12 @@ export default function TourPage() {
         aria-labelledby="tour-heading"
         className="relative overflow-hidden bg-white py-20 md:py-28"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div aria-hidden="true" className="grid-texture absolute inset-0" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 480, height: 480, top: -160, right: -120 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 420, height: 420, bottom: -180, left: -140 }}
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
+        <div aria-hidden="true" className="grid-texture pointer-events-none absolute inset-0 opacity-50" />
         <Container className="relative">
           <Eyebrow>The national tour</Eyebrow>
           <h1 id="tour-heading" className="display-xl mt-5 text-ink-950">
-            <span className="text-saffron-600">{cities.length} cities.</span>
+            <span className="text-gradient-brand">{cities.length} cities.</span>
             <br />
             One movement.
           </h1>
@@ -139,7 +129,7 @@ export default function TourPage() {
             title={
               <>
                 Where the movement{" "}
-                <span className="text-saffron-600">lands.</span>
+                <span className="text-gradient-brand">lands.</span>
               </>
             }
             lede="Select a city to see its programs, venue and ecosystem footprint."
@@ -163,7 +153,7 @@ export default function TourPage() {
             title={
               <>
                 Every stop.{" "}
-                <span className="text-green-700">Every venue.</span>
+                <span className="text-gradient-brand">Every venue.</span>
               </>
             }
             lede="Host venues are confirmed with partner institutions city by city — each stop publishes here the moment it locks."
@@ -200,7 +190,7 @@ export default function TourPage() {
                         viewBox="0 0 24 24"
                         fill="none"
                         aria-hidden="true"
-                        className="mt-0.5 shrink-0 text-saffron-600"
+                        className="mt-0.5 shrink-0 text-iris-600"
                       >
                         <path
                           d="M12 21s-7-5.1-7-11a7 7 0 1 1 14 0c0 5.9-7 11-7 11Z"
@@ -225,7 +215,7 @@ export default function TourPage() {
                               href={`/events/${e.slug}`}
                               className="group flex items-baseline justify-between gap-3 text-sm"
                             >
-                              <span className="text-ink-800 underline-offset-4 transition group-hover:text-saffron-600 group-hover:underline">
+                              <span className="text-ink-800 underline-offset-4 transition group-hover:text-iris-600 group-hover:underline">
                                 {e.title}
                               </span>
                               <span className="shrink-0 font-mono text-[11px] tabular-nums text-ink-400">
@@ -257,21 +247,10 @@ export default function TourPage() {
         aria-labelledby="tour-cta-heading"
         className="relative overflow-hidden bg-slate-50 py-20 text-center md:py-28"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 520, height: 520, top: -200, left: "50%", marginLeft: -260 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 360, height: 360, bottom: -160, right: -100 }}
-        />
         <Container className="relative">
           <h2 id="tour-cta-heading" className="display-lg text-ink-950">
             The tour is coming{" "}
-            <span className="text-saffron-600">to you.</span>
+            <span className="text-gradient-brand">to you.</span>
           </h2>
           <p className="lede mx-auto mt-4 max-w-xl">
             Register once — we&apos;ll route your application to your nearest tour

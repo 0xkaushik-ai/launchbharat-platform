@@ -121,7 +121,7 @@ export default function EventCard({
       >
         {/* Top row: date plate + badges */}
         <div className="flex items-start justify-between gap-4">
-          <p className="flex flex-col rounded-xl bg-gradient-to-br from-blue-50 to-green-500 px-3.5 py-3 leading-none">
+          <p className="flex flex-col rounded-xl bg-gradient-to-br from-mist to-iris-100 px-3.5 py-3 leading-none">
             <span
               className={`font-mono font-bold tabular-nums tracking-tight text-ink-950 ${
                 featured ? "text-3xl" : "text-2xl"
@@ -147,7 +147,7 @@ export default function EventCard({
         >
           <Link
             href={`/events/${event.slug}`}
-            className="transition-colors duration-200 hover:text-saffron-600"
+            className="transition-colors duration-200 hover:text-iris-600"
           >
             {event.title}
           </Link>

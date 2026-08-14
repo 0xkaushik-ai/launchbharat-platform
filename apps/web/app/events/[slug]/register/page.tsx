@@ -23,9 +23,10 @@ export default async function EventRegistrationPage({ params }: { params: Promis
     .maybeSingle();
 
   return (
-    <main className="min-h-[calc(100vh-12rem)] bg-slate-50 py-12 sm:py-16">
-      <div className="container-lb max-w-3xl">
-        <Link href={`/events/${slug}`} className="text-sm font-semibold text-saffron-600 hover:text-saffron-700">← Back to event</Link>
+    <main className="relative min-h-[calc(100vh-12rem)] overflow-hidden bg-paper py-12 sm:py-16">
+      <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
+      <div className="container-lb relative max-w-3xl">
+        <Link href={`/events/${slug}`} className="text-sm font-semibold text-iris-600 hover:text-iris-500">← Back to event</Link>
         <p className="chip-mono mt-7">Event registration</p>
         <h1 className="display-md mt-3 text-ink-950">{event.title}</h1>
         <p className="mt-3 text-sm text-ink-600">{new Intl.DateTimeFormat("en-IN", { dateStyle: "long" }).format(new Date(`${event.date_start}T00:00:00`))} · {event.venue}{event.city ? `, ${event.city}` : ""}</p>

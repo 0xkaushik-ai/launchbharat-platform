@@ -56,7 +56,7 @@ export default function ApplicationsPage() {
     <div>
       <h1 className="font-display text-3xl font-bold">Applications</h1>
       <p className="mt-1 text-sm text-ink-600">Review submissions through the transactional, audited workflow.</p>
-      <div className="mt-6 flex flex-wrap gap-2">{filters.map((item) => <button key={item} onClick={() => setFilter(item)} className={`rounded-lg px-3 py-2 text-sm capitalize ${filter === item ? "bg-saffron-600 text-white" : "border border-line bg-white text-ink-600"}`}>{item.replace("_", " ")}</button>)}</div>
+      <div className="mt-6 flex flex-wrap gap-2">{filters.map((item) => <button key={item} onClick={() => setFilter(item)} className={`rounded-lg px-3 py-2 text-sm capitalize ${filter === item ? "bg-iris-600 text-white" : "border border-line bg-white text-ink-600"}`}>{item.replace("_", " ")}</button>)}</div>
       {error && <p role="alert" className="mt-5 rounded-lg bg-red-50 p-3 text-sm text-red-700">{error}</p>}
       <div className="mt-5 space-y-3">
         {rows.length === 0 && <div className="rounded-xl border border-dashed border-line bg-white p-12 text-center text-sm text-ink-400">No applications in this queue.</div>}
@@ -75,4 +75,4 @@ export default function ApplicationsPage() {
 }
 
 function Detail({ label, value }: { label: string; value: string }) { return <div><p className="font-mono text-[10px] uppercase tracking-[.16em] text-ink-400">{label}</p><p className="mt-1 text-sm text-ink-800">{value || "—"}</p></div>; }
-function StatusBadge({ status }: { status: Status }) { const color = status === "approved" ? "bg-green-100 text-green-700" : status === "rejected" ? "bg-red-100 text-red-700" : "bg-saffron-100 text-saffron-700"; return <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium capitalize ${color}`}>{status.replace("_", " ")}</span>; }
+function StatusBadge({ status }: { status: Status }) { const color = status === "approved" ? "bg-green-100 text-green-700" : status === "rejected" ? "bg-red-100 text-red-700" : "bg-iris-100 text-iris-700"; return <span className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium capitalize ${color}`}>{status.replace("_", " ")}</span>; }

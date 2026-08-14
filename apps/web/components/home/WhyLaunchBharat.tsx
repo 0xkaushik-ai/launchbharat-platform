@@ -83,7 +83,7 @@ export default function WhyLaunchBharat() {
             title={
               <>
                 Built to{" "}
-                <span className="text-saffron-600">open doors</span>.
+                <span className="text-gradient-brand">open doors</span>.
               </>
             }
             lede="Six commitments define what the movement offers every participant — from first discovery to the national stage."
@@ -108,7 +108,7 @@ export default function WhyLaunchBharat() {
                   </span>
                   <span
                     aria-hidden="true"
-                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-saffron-500 to-green-500 text-saffron-600"
+                    className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-orchid-400 text-iris-600"
                   >
                     {ICONS[item.icon]}
                   </span>

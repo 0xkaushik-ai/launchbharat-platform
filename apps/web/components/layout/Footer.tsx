@@ -51,7 +51,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-line bg-paper text-ink-600">
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-saffron-500 via-white to-green-500 opacity-70"
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-cyan-400 via-iris-400 to-orchid-400 opacity-80"
       />
       <Container className="relative py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
@@ -61,7 +61,7 @@ export default function Footer() {
             <p className="mt-6 text-sm">
               <a
                 href={`mailto:${site.contact.email}`}
-                className="text-ink-800 underline-offset-4 transition hover:text-saffron-600 hover:underline"
+                className="text-ink-800 underline-offset-4 transition hover:text-iris-600 hover:underline"
               >
                 {site.contact.email}
               </a>
@@ -73,7 +73,7 @@ export default function Footer() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-mono text-xs font-medium uppercase tracking-[0.16em] transition hover:text-saffron-600"
+                    className="font-mono text-xs font-medium uppercase tracking-[0.16em] transition hover:text-iris-600"
                   >
                     {s.label}
                   </a>
@@ -90,7 +90,7 @@ export default function Footer() {
                   <li key={l.label}>
                     <Link
                       href={l.href}
-                      className="text-sm transition hover:text-saffron-600"
+                      className="text-sm transition hover:text-iris-600"
                     >
                       {l.label}
                     </Link>

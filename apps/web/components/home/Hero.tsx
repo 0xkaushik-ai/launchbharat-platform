@@ -16,7 +16,7 @@ function AccentedHeadline({ text }: { text: string }) {
   return (
     <>
       {text.slice(0, idx)}
-      <span className="text-saffron-600">
+      <span className="text-gradient-brand">
         {text.slice(idx, idx + target.length)}
       </span>
       {text.slice(idx + target.length)}
@@ -38,20 +38,17 @@ export default function Hero() {
       aria-labelledby="hero-heading"
       className="relative isolate flex min-h-[85svh] flex-col overflow-hidden bg-white"
     >
-      {/* Soft aurora wash + hairline grid */}
-      <div aria-hidden="true" className="hidden" />
-      <div aria-hidden="true" className="grid-texture absolute inset-0 -z-10 opacity-20" />
-
-      {/* Ambient orbs */}
+      <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0 -z-10" />
+      <div aria-hidden="true" className="grid-texture pointer-events-none absolute inset-0 -z-10 opacity-40" />
       <div
         aria-hidden="true"
-        className="hidden"
-        style={{ width: 520, height: 520 }}
+        className="orb orb-sky animate-float-slow -left-24 -top-16 opacity-80"
+        style={{ width: 420, height: 420 }}
       />
       <div
         aria-hidden="true"
-        className="hidden"
-        style={{ width: 540, height: 540 }}
+        className="orb orb-iris animate-float-slower -right-16 top-24 opacity-70"
+        style={{ width: 380, height: 380 }}
       />
 
       <Container className="relative flex flex-1 items-center py-20 md:py-24">
@@ -131,7 +128,7 @@ export default function Hero() {
             {taglineWords.map((word, i) => (
               <span key={word} className="flex items-center gap-x-4">
                 {i > 0 && (
-                  <span aria-hidden="true" className="text-saffron-500">
+                  <span aria-hidden="true" className="text-iris-400">
                     {"//"}
                   </span>
                 )}
@@ -143,7 +140,7 @@ export default function Hero() {
             <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-ink-400">
               Scroll
             </span>
-            <span className="h-6 w-px animate-pulse bg-gradient-to-b from-saffron-500/80 to-transparent" />
+            <span className="h-6 w-px animate-pulse bg-gradient-to-b from-iris-400/80 to-transparent" />
           </div>
         </Container>
       </div>

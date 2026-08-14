@@ -72,12 +72,12 @@ export default async function EventsPage() {
         aria-labelledby="events-hero-heading"
         className="relative overflow-hidden bg-white py-20 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <Eyebrow>Events</Eyebrow>
           <h1 id="events-hero-heading" className="display-lg mt-5 text-ink-950">
             The national{" "}
-            <span className="text-saffron-600">calendar.</span>
+            <span className="text-gradient-brand">calendar.</span>
           </h1>
           <p className="lede mt-5 max-w-2xl">
             Roadshows, bootcamps, pitch days and forums — the movement as it

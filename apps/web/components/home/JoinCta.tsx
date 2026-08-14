@@ -14,14 +14,11 @@ export default function JoinCta() {
       aria-labelledby="join-cta-heading"
       className="relative overflow-hidden bg-mist"
     >
-      <div aria-hidden="true" className="hidden" />
+      <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
       <div
         aria-hidden="true"
-        className="hidden"
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
+        className="orb orb-pink animate-float-slower -right-10 top-0 opacity-60"
+        style={{ width: 360, height: 360 }}
       />
 
       <div className="grid-texture relative py-24 md:py-36">
@@ -30,7 +27,7 @@ export default function JoinCta() {
             <Eyebrow>Join the movement</Eyebrow>
             <h2 id="join-cta-heading" className="display-lg max-w-4xl text-ink-950">
               Your idea.{" "}
-              <span className="text-saffron-600">India&apos;s stage</span>.
+              <span className="text-gradient-brand">India&apos;s stage</span>.
             </h2>
             <p className="lede max-w-2xl">
               One application is all it takes to enter a nationwide journey

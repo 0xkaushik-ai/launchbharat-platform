@@ -214,7 +214,7 @@ function validateStep(step: number, v: FormValues): Errors {
 /* ——— Small building blocks ——— */
 
 const inputCls = (invalid: boolean) =>
-  `w-full rounded-xl border bg-white px-4 py-3 text-sm text-ink-950 transition placeholder:text-ink-400 focus:border-saffron-500 focus:shadow-[0_0_0_3px_rgba(234,124,12,0.12)] focus:outline-none ${
+  `w-full rounded-xl border bg-white px-4 py-3 text-sm text-ink-950 transition placeholder:text-ink-400 focus:border-iris-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.14)] focus:outline-none ${
     invalid ? "border-red-400" : "border-line"
   }`;
 
@@ -253,7 +253,7 @@ function ChevronIcon() {
 function RequiredMark() {
   return (
     <>
-      <span aria-hidden="true" className="ml-0.5 text-saffron-600">
+      <span aria-hidden="true" className="ml-0.5 text-iris-600">
         *
       </span>
       <span className="sr-only">required</span>
@@ -328,7 +328,7 @@ function Progress({ step }: { step: number }) {
           className="mt-2.5 h-1 w-full overflow-hidden rounded-full bg-line"
         >
           <div
-            className="h-full rounded-full bg-gradient-to-r from-saffron-500 via-white to-green-500 transition-[width] duration-300"
+            className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-iris-400 to-orchid-400 transition-[width] duration-300"
             style={{ width: `${((step + 1) / STEPS.length) * 100}%` }}
           />
         </div>
@@ -350,7 +350,7 @@ function Progress({ step }: { step: number }) {
                   aria-hidden="true"
                   className={`mx-2 mt-[15px] h-px min-w-4 flex-1 ${
                     i <= step
-                      ? "bg-gradient-to-r from-saffron-500 via-white to-green-500"
+                      ? "bg-gradient-to-r from-cyan-400 via-iris-400 to-orchid-400"
                       : "bg-line"
                   }`}
                 />
@@ -360,9 +360,9 @@ function Progress({ step }: { step: number }) {
                   aria-hidden="true"
                   className={`flex h-8 w-8 items-center justify-center rounded-full font-mono text-[11px] font-bold tabular-nums ${
                     done
-                      ? "bg-gradient-to-br from-saffron-500 to-green-500 text-ink-950 shadow-[0_6px_16px_-6px_rgba(234,124,12,0.5)]"
+                      ? "bg-gradient-to-br from-cyan-400 to-orchid-400 text-white shadow-[0_6px_16px_-6px_rgba(139,92,246,0.4)]"
                       : current
-                        ? "border-2 border-saffron-500 bg-saffron-500 text-saffron-600 shadow-[0_0_18px_rgba(234,124,12,0.35)]"
+                        ? "border-2 border-iris-500 bg-iris-500 text-white shadow-[0_0_18px_rgba(139,92,246,0.28)]"
                         : "border border-line bg-white text-ink-400"
                   }`}
                 >
@@ -465,7 +465,7 @@ function SuccessView({ id }: { id: string }) {
     <div className="flex flex-col items-start gap-8">
       <span
         aria-hidden="true"
-        className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-saffron-500 via-white to-green-500 text-ink-950 shadow-[0_14px_32px_-12px_rgba(234,124,12,0.55)]"
+        className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 via-iris-400 to-orchid-400 text-ink-950 shadow-[0_14px_32px_-12px_rgba(139,92,246,0.4)]"
       >
         <CheckIcon className="h-7 w-7" />
       </span>
@@ -476,7 +476,7 @@ function SuccessView({ id }: { id: string }) {
           tabIndex={-1}
           className="display-md text-ink-950 focus:outline-none"
         >
-          Welcome to <span className="text-saffron-600">LaunchBharat</span>.
+          Welcome to <span className="text-gradient-brand">LaunchBharat</span>.
         </h2>
         <p className="mt-3 text-base leading-relaxed text-ink-800">
           Your application has been successfully submitted.
@@ -495,7 +495,7 @@ function SuccessView({ id }: { id: string }) {
         <button
           type="button"
           onClick={copyId}
-          className="chip-mono shrink-0 cursor-pointer transition hover:border-saffron-500 hover:text-saffron-600"
+          className="chip-mono shrink-0 cursor-pointer transition hover:border-iris-400 hover:text-iris-600"
         >
           {copied ? "Copied" : "Copy"}
         </button>
@@ -513,7 +513,7 @@ function SuccessView({ id }: { id: string }) {
             <li key={text} className="flex gap-3 text-sm leading-relaxed text-ink-800">
               <span
                 aria-hidden="true"
-                className="mt-px flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-saffron-500 to-green-500 font-mono text-[10px] font-bold tabular-nums text-ink-950"
+                className="mt-px flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-cyan-400 to-orchid-400 font-mono text-[10px] font-bold tabular-nums text-ink-950"
               >
                 0{i + 1}
               </span>
@@ -797,7 +797,7 @@ export default function RegistrationForm() {
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-600">
             We sent a confirmation link to <span className="font-semibold text-ink-800">{confirmationEmail}</span>. Open it in this browser and you will return directly to this application.
           </p>
-          <button type="button" onClick={() => setConfirmationEmail(null)} className="mt-6 text-sm font-semibold text-saffron-600 hover:text-saffron-700">Use a different email</button>
+          <button type="button" onClick={() => setConfirmationEmail(null)} className="mt-6 text-sm font-semibold text-iris-600 hover:text-iris-500">Use a different email</button>
         </div>
       );
     }
@@ -825,13 +825,13 @@ export default function RegistrationForm() {
             {authMode === "signup" && <span className="mt-1.5 block text-xs font-normal text-ink-500">Use at least 8 characters.</span>}
           </label>
           {authError && <p role="alert" className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{authError}</p>}
-          <button disabled={authSubmitting} className="rounded-full bg-saffron-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-saffron-700 disabled:cursor-not-allowed disabled:opacity-60">
+          <button disabled={authSubmitting} className="rounded-full btn-brand px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60">
             {authSubmitting ? "Please wait…" : authMode === "signup" ? "Create account and continue" : "Sign in and continue"}
           </button>
         </form>
         <p className="mt-6 text-sm text-ink-600">
           {authMode === "signup" ? "Already have an account?" : "New to LaunchBharat?"}{" "}
-          <button type="button" onClick={() => { setAuthMode(authMode === "signup" ? "login" : "signup"); setAuthError(null); }} className="font-semibold text-saffron-600 hover:text-saffron-700">
+          <button type="button" onClick={() => { setAuthMode(authMode === "signup" ? "login" : "signup"); setAuthError(null); }} className="font-semibold text-iris-600 hover:text-iris-500">
             {authMode === "signup" ? "Sign in" : "Create your account"}
           </button>
         </p>
@@ -1281,7 +1281,7 @@ export default function RegistrationForm() {
                       <button
                         type="button"
                         onClick={() => goToStep(group.step)}
-                        className="font-mono text-[11px] font-semibold uppercase tracking-widest text-saffron-600 underline-offset-4 hover:underline"
+                        className="font-mono text-[11px] font-semibold uppercase tracking-widest text-iris-600 underline-offset-4 hover:underline"
                       >
                         Edit
                         <span className="sr-only"> {meta.title}</span>

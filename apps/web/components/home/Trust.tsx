@@ -74,7 +74,7 @@ export default function Trust() {
           title={
             <>
               Built around the{" "}
-              <span className="text-green-700">ecosystem</span>.
+              <span className="text-gradient-brand">ecosystem</span>.
             </>
           }
           lede="LaunchBharat operates on verified relationships — associations appear here only once formally approved."

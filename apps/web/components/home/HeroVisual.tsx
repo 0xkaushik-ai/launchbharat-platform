@@ -123,7 +123,7 @@ export default function HeroVisual({ className = "" }: { className?: string }) {
       <span className="glass absolute right-0 top-[10%] z-10 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-[10px] font-medium uppercase tracking-[0.16em] text-ink-600">
         <span
           aria-hidden="true"
-          className="h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-saffron-500 to-green-500 shadow-[0_0_8px_rgba(234,124,12,0.55)]"
+          className="h-1.5 w-1.5 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-orchid-400 shadow-[0_0_8px_rgba(234,124,12,0.55)]"
         />
         12-city national tour
       </span>

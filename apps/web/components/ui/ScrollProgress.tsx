@@ -30,7 +30,7 @@ export default function ScrollProgress() {
       className="pointer-events-none fixed inset-x-0 top-0 z-[70] h-[2px] bg-transparent"
     >
       <div
-        className="h-full origin-left bg-gradient-to-r from-saffron-500 via-white to-green-500 shadow-[0_0_12px_rgba(234,124,12,0.5)]"
+        className="h-full origin-left bg-gradient-to-r from-cyan-400 via-iris-500 to-orchid-400 shadow-[0_0_12px_rgba(139,92,246,0.45)]"
         style={{ transform: `scaleX(${progress})` }}
       />
     </div>

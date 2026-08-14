@@ -50,21 +50,12 @@ export default function AccessibilityPage() {
         aria-labelledby="a11y-hero-heading"
         className="relative overflow-hidden bg-slate-50 py-16 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-        />
         <Container className="relative">
           <div className="flex max-w-3xl flex-col items-start gap-5">
             <Eyebrow>Accessibility</Eyebrow>
             <h1 id="a11y-hero-heading" className="display-lg text-ink-950">
               Accessibility for{" "}
-              <span className="text-saffron-600">everyone</span>.
+              <span className="text-gradient-brand">everyone</span>.
             </h1>
             <p className="lede">
               A movement for all of India has to be usable by all of India.
@@ -84,7 +75,7 @@ export default function AccessibilityPage() {
               size="md"
               title={
                 <>
-                  Our <span className="text-green-700">commitment</span>.
+                  Our <span className="text-gradient-brand">commitment</span>.
                 </>
               }
             />
@@ -121,7 +112,7 @@ export default function AccessibilityPage() {
               title={
                 <>
                   What is{" "}
-                  <span className="text-saffron-600">implemented</span>.
+                  <span className="text-gradient-brand">implemented</span>.
                 </>
               }
             />
@@ -163,7 +154,7 @@ export default function AccessibilityPage() {
               size="md"
               title={
                 <>
-                  Language <span className="text-green-700">support</span>.
+                  Language <span className="text-gradient-brand">support</span>.
                 </>
               }
             />
@@ -197,7 +188,7 @@ export default function AccessibilityPage() {
               title={
                 <>
                   Known limitations &amp;{" "}
-                  <span className="text-saffron-600">feedback</span>.
+                  <span className="text-gradient-brand">feedback</span>.
                 </>
               }
             />
@@ -218,7 +209,7 @@ export default function AccessibilityPage() {
               <p>
                 <a
                   href={`mailto:${site.contact.email}?subject=${encodeURIComponent("Accessibility")}`}
-                  className="font-semibold text-saffron-600 underline-offset-4 hover:underline"
+                  className="font-semibold text-iris-600 underline-offset-4 hover:underline"
                 >
                   Report an accessibility issue
                 </a>

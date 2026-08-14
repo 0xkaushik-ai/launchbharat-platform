@@ -94,11 +94,6 @@ export default function EcosystemOrbit() {
       className="section-pad grid-texture relative overflow-hidden bg-slate-50"
     >
       {/* Ambient orb behind the orbit visual */}
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 560, height: 560, top: "30%", left: "calc(50% - 280px)" }}
-      />
       <Container className="relative">
         <SectionHeading
           id="ecosystem-orbit-heading"
@@ -107,7 +102,7 @@ export default function EcosystemOrbit() {
           title={
             <>
               One movement.{" "}
-              <span className="text-saffron-600">Every stakeholder.</span>
+              <span className="text-gradient-brand">Every stakeholder.</span>
             </>
           }
           lede="Hover or tap any node to see its role in the movement."
@@ -195,7 +190,7 @@ export default function EcosystemOrbit() {
               <div className="glass neo-border flex flex-col items-center gap-1.5 rounded-2xl px-5 py-4 shadow-[0_20px_50px_-22px_rgba(15,23,42,0.28)] sm:px-7 sm:py-5">
                 <span className="font-display text-base font-bold leading-none tracking-tight sm:text-2xl">
                   <span className="text-ink-950">LAUNCH</span>
-                  <span className="text-green-700">BHARAT</span>
+                  <span className="text-gradient-brand">BHARAT</span>
                 </span>
                 <span className="hidden font-mono text-[8px] font-semibold uppercase tracking-[0.3em] text-ink-600 sm:block">
                   The National Platform
@@ -222,8 +217,8 @@ export default function EcosystemOrbit() {
                   style={{ left: `${p.x}%`, top: `${p.y}%` }}
                   className={`absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border px-3 py-2 font-mono text-[10px] font-semibold uppercase tracking-wider backdrop-blur transition duration-200 ease-out sm:text-xs ${
                     isActive
-                      ? "scale-[1.05] border-saffron-500 bg-white text-ink-950 shadow-[0_0_0_1px_rgba(234,124,12,0.25),0_12px_32px_-10px_rgba(234,124,12,0.45)]"
-                      : "border-line bg-white/80 text-ink-800 hover:border-saffron-500 hover:text-saffron-600 hover:shadow-[0_10px_26px_-12px_rgba(234,124,12,0.4)]"
+                      ? "scale-[1.05] border-iris-400 bg-white text-ink-950 shadow-[0_0_0_1px_rgba(234,124,12,0.25),0_12px_32px_-10px_rgba(234,124,12,0.45)]"
+                      : "border-line bg-white/80 text-ink-800 hover:border-iris-400 hover:text-iris-600 hover:shadow-[0_10px_26px_-12px_rgba(139,92,246,0.28)]"
                   }`}
                 >
                   {n.shortLabel ? (
@@ -245,7 +240,7 @@ export default function EcosystemOrbit() {
             className="glass corner-frame mx-auto mt-10 flex min-h-[10.5rem] max-w-xl flex-col items-center gap-3 rounded-2xl px-6 py-6 text-center sm:min-h-[9.5rem]"
           >
             <span className="font-mono text-xs font-bold uppercase tracking-[0.25em]">
-              <span className="text-green-700">
+              <span className="text-gradient-brand">
                 {active ? active.label : "LaunchBharat"}
               </span>
             </span>

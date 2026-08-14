@@ -25,7 +25,7 @@ export default function Marquee({
       {items.map((item, i) => (
         <span key={i} className={`flex items-center ${itemClassName}`}>
           <span className="whitespace-nowrap">{item}</span>
-          <span aria-hidden="true" className="mx-6 text-saffron-600/70 md:mx-10">
+          <span aria-hidden="true" className="mx-6 text-iris-600/70 md:mx-10">
             {separator}
           </span>
         </span>

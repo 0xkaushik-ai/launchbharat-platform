@@ -77,12 +77,12 @@ function JuryMark({ className = "" }: { className?: string }) {
       <path
         d="M24 5a19 19 0 0 1 19 19"
         stroke="currentColor"
-        className="text-saffron-600"
+        className="text-gradient-brand"
       />
       <path
         d="M24 43A19 19 0 0 1 5 24"
         stroke="currentColor"
-        className="text-blue-800"
+        className="text-gradient-brand"
       />
     </svg>
   );
@@ -98,18 +98,7 @@ export default function GrandFinalePage() {
         aria-labelledby="gf-hero-title"
         className="relative overflow-hidden bg-white"
       >
-        {/* soft aurora backdrop + ambient orbs + watermark */}
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 480, height: 480, top: -160, left: -160 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 420, height: 420, bottom: -160, right: -140 }}
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <span
           aria-hidden="true"
           className="text-outline font-display pointer-events-none absolute left-1/2 top-14 -translate-x-1/2 select-none font-bold leading-none whitespace-nowrap"
@@ -125,10 +114,10 @@ export default function GrandFinalePage() {
                 <Eyebrow>The national stage</Eyebrow>
                 <h1 id="gf-hero-title" className="display-xl text-ink-950">
                   The Grand{" "}
-                  <span className="text-green-700">Finale.</span>
+                  <span className="text-gradient-brand">Finale.</span>
                 </h1>
                 <p className="display-md">
-                  <span className="text-saffron-600">
+                  <span className="text-gradient-brand">
                     From ideas to impact.
                   </span>
                 </p>
@@ -169,7 +158,7 @@ export default function GrandFinalePage() {
               title={
                 <>
                   Four arenas.{" "}
-                  <span className="text-saffron-600">One stage.</span>
+                  <span className="text-gradient-brand">One stage.</span>
                 </>
               }
               lede="The finale runs on four tracks — competition, capital, exhibition and recognition — each built to a national standard."
@@ -219,7 +208,7 @@ export default function GrandFinalePage() {
               title={
                 <>
                   Honours of the{" "}
-                  <span className="text-green-700">national stage.</span>
+                  <span className="text-gradient-brand">national stage.</span>
                 </>
               }
               lede="Conferred once a year, in the open, before the entire movement."
@@ -269,7 +258,7 @@ export default function GrandFinalePage() {
               title={
                 <>
                   The national{" "}
-                  <span className="text-saffron-600">jury.</span>
+                  <span className="text-gradient-brand">jury.</span>
                 </>
               }
               lede="Founders, investors, academics and industry leaders from across the ecosystem judge the finale and take the stage."
@@ -288,7 +277,7 @@ export default function GrandFinalePage() {
                   <p className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-600">
                     <span
                       aria-hidden="true"
-                      className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-saffron-500"
+                      className="animate-pulse-dot h-1.5 w-1.5 rounded-full bg-iris-500"
                     />
                     To be announced
                   </p>
@@ -318,7 +307,7 @@ export default function GrandFinalePage() {
               title={
                 <>
                   Earn your place{" "}
-                  <span className="text-green-700">on the stage.</span>
+                  <span className="text-gradient-brand">on the stage.</span>
                 </>
               }
               lede="There are no wildcard entries. Every finalist advances through the movement."
@@ -366,17 +355,6 @@ export default function GrandFinalePage() {
         aria-labelledby="gf-cta-heading"
         className="relative overflow-hidden bg-mist"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 440, height: 440, top: -150, left: -130 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 380, height: 380, bottom: -130, right: -110 }}
-        />
         <div className="section-pad relative">
           <Container>
             <Reveal className="flex flex-col items-center gap-8 text-center">
@@ -386,7 +364,7 @@ export default function GrandFinalePage() {
                 className="display-lg max-w-4xl text-ink-950"
               >
                 One national stage.{" "}
-                <span className="text-saffron-600">
+                <span className="text-gradient-brand">
                   One founding cohort.
                 </span>
               </h2>

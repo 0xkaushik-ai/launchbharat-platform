@@ -27,17 +27,7 @@ export default function EcosystemPage() {
         aria-labelledby="ecosystem-hero-heading"
         className="relative overflow-hidden bg-white py-16 md:py-24"
       >
-        <div aria-hidden="true" className="hidden" />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 480, height: 480, top: -180, right: -120 }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 380, height: 380, bottom: -160, left: -100 }}
-        />
+        <div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" />
         <Container className="relative">
           <Eyebrow withRule>The Ecosystem</Eyebrow>
           <h1
@@ -45,7 +35,7 @@ export default function EcosystemPage() {
             className="display-lg mt-5 max-w-4xl text-ink-950"
           >
             Campus to capital,{" "}
-            <span className="text-saffron-600">connected.</span>
+            <span className="text-gradient-brand">connected.</span>
           </h1>
           <p className="lede mt-5 max-w-2xl">
             Ideas begin on campus and scale through the ecosystem. Colleges
@@ -62,7 +52,7 @@ export default function EcosystemPage() {
                 {i < CHAIN.length - 1 && (
                   <svg
                     viewBox="0 0 24 24"
-                    className="h-4 w-4 shrink-0 text-saffron-600"
+                    className="h-4 w-4 shrink-0 text-iris-600"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth={1.5}
@@ -94,22 +84,12 @@ export default function EcosystemPage() {
         aria-labelledby="ecosystem-cta-heading"
         className="section-pad relative overflow-hidden bg-mist"
       >
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 460, height: 460, top: -160, left: "10%" }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden"
-          style={{ width: 420, height: 420, bottom: -180, right: "6%" }}
-        />
         <Container className="relative text-center">
           <Reveal className="mx-auto flex max-w-2xl flex-col items-center gap-6">
             <div className="tricolor-rule w-20" aria-hidden="true" />
             <h2 id="ecosystem-cta-heading" className="display-md text-ink-950">
               Take your place in the{" "}
-              <span className="text-green-700">movement.</span>
+              <span className="text-gradient-brand">movement.</span>
             </h2>
             <p className="max-w-xl text-base leading-relaxed text-ink-800">
               Register as a participant or partner with the platform — the

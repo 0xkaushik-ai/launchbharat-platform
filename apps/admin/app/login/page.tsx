@@ -36,18 +36,18 @@ function LoginForm() {
   }
 
   return (
-    <form onSubmit={submit} className="w-full max-w-md rounded-2xl border border-line bg-white p-8 shadow-sm">
+    <form onSubmit={submit} className="surface w-full max-w-md p-8">
       <Image src="/logo.jpg" alt="LaunchBharat" width={220} height={70} className="mx-auto h-12 w-auto object-contain" priority />
       <h1 className="mt-7 text-center font-display text-2xl font-bold">Admin sign in</h1>
       <p className="mt-1 text-center text-sm text-ink-600">Only explicitly assigned staff accounts can continue.</p>
-      <label className="mt-7 block text-sm font-medium">Email<input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-saffron-500" /></label>
-      <label className="mt-4 block text-sm font-medium">Password<input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-line px-4 py-3 outline-none focus:border-saffron-500" /></label>
+      <label className="mt-7 block text-sm font-medium">Email<input type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} className="field-input mt-2" /></label>
+      <label className="mt-4 block text-sm font-medium">Password<input type="password" required autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} className="field-input mt-2" /></label>
       {error && <p role="alert" className="mt-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">{error}</p>}
-      <button disabled={loading} className="mt-6 w-full rounded-xl bg-saffron-600 px-4 py-3 font-semibold text-white hover:bg-saffron-700 disabled:opacity-50">{loading ? "Signing in…" : "Sign in"}</button>
+      <button disabled={loading} className="btn-brand mt-6 w-full rounded-full px-4 py-3 font-semibold disabled:opacity-50">{loading ? "Signing in…" : "Sign in"}</button>
     </form>
   );
 }
 
 export default function LoginPage() {
-  return <main className="flex min-h-screen items-center justify-center bg-slate-50 p-5"><Suspense><LoginForm /></Suspense></main>;
+  return <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-paper p-5"><div aria-hidden="true" className="aurora-wash pointer-events-none absolute inset-0" /><div className="relative"><Suspense><LoginForm /></Suspense></div></main>;
 }

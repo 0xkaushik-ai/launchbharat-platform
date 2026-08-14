@@ -73,20 +73,6 @@ export default function NationMapSection() {
       className="section-pad grid-texture relative overflow-hidden bg-white"
     >
       {/* Soft aurora behind the map side */}
-      <div
-        aria-hidden="true"
-        className="hidden"
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 420, height: 420, top: "-6rem", left: "-10rem" }}
-      />
-      <div
-        aria-hidden="true"
-        className="hidden"
-        style={{ width: 380, height: 380, bottom: "-9rem", left: "24%" }}
-      />
       <Container className="relative">
         <SectionHeading
           id="nation-map-heading"
@@ -95,7 +81,7 @@ export default function NationMapSection() {
           title={
             <>
               From campus to the{" "}
-              <span className="text-saffron-600">nation.</span>
+              <span className="text-gradient-brand">nation.</span>
             </>
           }
           lede="Ideas can begin anywhere. Opportunity shouldn't."
