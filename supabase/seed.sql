@@ -1,0 +1,2 @@
+-- Keep production bootstrap data out of migrations. Local test data can be
+-- added here without coupling deployments to a specific administrator email.

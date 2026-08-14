@@ -1,12 +1,19 @@
 {
-  "name": "launchbharat",
+  "name": "launchbharat-platform",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "dev:web": "npm run dev --workspace @launchbharat/web",
+    "dev:admin": "npm run dev --workspace @launchbharat/admin",
+    "build": "npm run build --workspaces --if-present",
+    "build:web": "npm run build --workspace @launchbharat/web",
+    "build:admin": "npm run build --workspace @launchbharat/admin",
+    "lint": "npm run lint --workspaces --if-present",
+    "typecheck": "npm run typecheck --workspaces --if-present"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",
