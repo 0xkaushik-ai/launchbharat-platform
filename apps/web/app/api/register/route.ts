@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from "@/lib/supabase-server";
 
 const STRING_KEYS = [
   "fullName",
@@ -37,14 +37,18 @@ export async function POST(request: Request) {
   }
   application.consent = raw.consent === true;
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !key) {
-    return NextResponse.json({ error: "Registration is temporarily unavailable." }, { status: 503 });
-  }
-
   try {
-    const supabase = createClient(url, key, { auth: { persistSession: false } });
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: "Please sign in before submitting an application." },
+        { status: 401 },
+      );
+    }
+
+    // The database uses the verified account email, never a browser supplied email.
+    application.email = user.email?.trim().toLowerCase() ?? "";
     const { data, error } = await supabase.rpc("submit_application", { payload: application });
     if (error) {
       return NextResponse.json({ error: error.message || "Could not submit application." }, { status: 400 });

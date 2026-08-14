@@ -8,6 +8,8 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui";
+import { createClient } from "@/lib/supabase-browser";
+import type { User } from "@supabase/supabase-js";
 
 /* ——— Static form data ——— */
 
@@ -522,6 +524,9 @@ function SuccessView({ id }: { id: string }) {
       </div>
 
       <div className="flex flex-wrap items-center gap-4 border-t border-line pt-6">
+        <Button href="/portal" variant="primary">
+          Go to my portal
+        </Button>
         <Button href="/events" variant="secondary">
           Explore events
         </Button>
@@ -543,11 +548,33 @@ export default function RegistrationForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [applicationId, setApplicationId] = useState<string | null>(null);
+  const [accountUser, setAccountUser] = useState<User | null>(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   const rootRef = useRef<HTMLDivElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const focusHeadingPending = useRef(false);
   const focusErrorPending = useRef(false);
+
+  /* An application is always linked to a verified applicant account. */
+  useEffect(() => {
+    const supabase = createClient();
+    void supabase.auth.getUser().then(({ data: { user } }) => {
+      setAccountUser(user);
+      if (user?.email) {
+        setValues((current) => ({ ...current, email: user.email ?? current.email }));
+      }
+      setAuthLoading(false);
+    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setAccountUser(session?.user ?? null);
+      if (session?.user.email) {
+        setValues((current) => ({ ...current, email: session.user.email ?? current.email }));
+      }
+      setAuthLoading(false);
+    });
+    return () => subscription.unsubscribe();
+  }, []);
 
   /* Restore draft from sessionStorage on mount. */
   useEffect(() => {
@@ -711,6 +738,26 @@ export default function RegistrationForm() {
     );
   }
 
+  if (authLoading) {
+    return <div className="glass corner-frame rounded-3xl p-8 text-sm text-ink-600">Preparing your application…</div>;
+  }
+
+  if (!accountUser) {
+    return (
+      <div className="glass corner-frame rounded-3xl p-6 sm:p-8 lg:p-10">
+        <p className="chip-mono">Your applicant account</p>
+        <h2 className="display-sm mt-4 text-ink-950">Start with a secure account.</h2>
+        <p className="mt-3 max-w-xl text-sm leading-relaxed text-ink-600">
+          Your account saves your application, lets you track its review status, and keeps every next step in one personal portal.
+        </p>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Button href="/portal/signup?next=/register" variant="primary">Create account</Button>
+          <Button href="/portal/login?next=/register" variant="secondary">Sign in</Button>
+        </div>
+      </div>
+    );
+  }
+
   const current = STEPS[step];
 
   return (
@@ -762,12 +809,13 @@ export default function RegistrationForm() {
                   type="email"
                   autoComplete="email"
                   value={values.email}
-                  onChange={(e) => setField("email", e.target.value)}
+                  readOnly
                   aria-required="true"
                   aria-invalid={errors.email ? true : undefined}
                   aria-describedby={describedBy("reg-email", errors.email)}
                   className={inputCls(!!errors.email)}
                 />
+                <p className="mt-1.5 text-xs text-ink-500">Linked to your applicant portal account.</p>
               </Field>
               <Field
                 id="reg-mobile"

@@ -41,6 +41,7 @@ export type Database = {
           state: string
           status: Database["public"]["Enums"]["application_status"]
           updated_at: string
+          user_id: string | null
           website_url: string | null
         }
         Insert: {
@@ -69,6 +70,7 @@ export type Database = {
           state: string
           status?: Database["public"]["Enums"]["application_status"]
           updated_at?: string
+          user_id?: string | null
           website_url?: string | null
         }
         Update: {
@@ -97,6 +99,7 @@ export type Database = {
           state?: string
           status?: Database["public"]["Enums"]["application_status"]
           updated_at?: string
+          user_id?: string | null
           website_url?: string | null
         }
         Relationships: []
@@ -362,29 +365,50 @@ export type Database = {
       profiles: {
         Row: {
           avatar_url: string | null
+          city: string | null
+          college: string | null
+          course: string | null
           created_at: string
           email: string | null
           full_name: string | null
+          graduation_year: string | null
           id: string
           mobile: string | null
+          onboarding_completed: boolean
+          participant_role: string | null
+          state: string | null
           updated_at: string
         }
         Insert: {
           avatar_url?: string | null
+          city?: string | null
+          college?: string | null
+          course?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
+          graduation_year?: string | null
           id: string
           mobile?: string | null
+          onboarding_completed?: boolean
+          participant_role?: string | null
+          state?: string | null
           updated_at?: string
         }
         Update: {
           avatar_url?: string | null
+          city?: string | null
+          college?: string | null
+          course?: string | null
           created_at?: string
           email?: string | null
           full_name?: string | null
+          graduation_year?: string | null
           id?: string
           mobile?: string | null
+          onboarding_completed?: boolean
+          participant_role?: string | null
+          state?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -452,6 +476,7 @@ export type Database = {
           state: string
           status: Database["public"]["Enums"]["application_status"]
           updated_at: string
+          user_id: string | null
           website_url: string | null
         }
         SetofOptions: {

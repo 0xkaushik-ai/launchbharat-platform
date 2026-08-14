@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LogoMark, Button } from "@/components/ui";
+import { createClient } from "@/lib/supabase-browser";
 import type { NavItem } from "@/lib/content";
 import type { User } from "@supabase/supabase-js";
 
@@ -20,10 +21,10 @@ export default function Header({
 }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(user);
   const pathname = usePathname();
   const router = useRouter();
   const handleSignOut = async () => {
-    const { createClient } = await import("@/lib/supabase-browser");
     const supabase = createClient();
     await supabase.auth.signOut();
     router.push("/");
@@ -35,6 +36,13 @@ export default function Header({
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const supabase = createClient();
+    void supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => setCurrentUser(session?.user ?? null));
+    return () => subscription.unsubscribe();
   }, []);
 
   // Close the menu on route change and lock scroll while open
@@ -110,7 +118,7 @@ export default function Header({
           </nav>
 
           <div className="flex items-center gap-3">
-            {user ? (
+            {currentUser ? (
               <div className="relative group hidden sm:block">
                 <button
                   type="button"
@@ -123,7 +131,7 @@ export default function Header({
                 </button>
                 <div className="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 focus-within:opacity-100 focus-within:visible">
                   <Link
-                    href="/profile"
+                    href="/portal"
                     className="block px-4 py-2 text-sm text-ink-800 hover:bg-slate-50 transition"
                   >
                     Your Profile
@@ -233,10 +241,10 @@ export default function Header({
             </ul>
           </nav>
           <div className="container-lb relative pb-8">
-            {user ? (
+            {currentUser ? (
               <div className="space-y-3">
-                <Button href="/profile" variant="primary" size="lg" className="w-full">
-                  View Profile
+                <Button href="/portal" variant="primary" size="lg" className="w-full">
+                  My application
                 </Button>
                 <Button onClick={handleSignOut} variant="secondary" size="lg" className="w-full text-red-600 border-red-200 hover:bg-red-50">
                   Sign out
