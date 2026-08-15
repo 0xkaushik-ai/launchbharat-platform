@@ -78,7 +78,7 @@ export default function WhyLaunchBharat() {
         <Reveal>
           <SectionHeading
             id="why-heading"
-            number="06"
+            number="05"
             eyebrow="Why LaunchBharat"
             title={
               <>

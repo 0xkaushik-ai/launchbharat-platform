@@ -29,18 +29,20 @@ export default function WhoShouldJoin() {
       className="section-pad bg-white"
     >
       <Container>
-        <SectionHeading
-          id="who-should-join-heading"
-          number="07"
-          eyebrow="Who Should Join"
-          title={
-            <>
-              If you have <span className="text-gradient-brand">an idea</span>,
-              you have a place here.
-            </>
-          }
-          lede="Eight entry points, one national platform — wherever you stand in the journey, the movement has a role for you."
-        />
+        <Reveal>
+          <SectionHeading
+            id="who-should-join-heading"
+            number="02"
+            eyebrow="Choose your path"
+            title={
+              <>
+                A national platform for every{" "}
+                <span className="text-gradient-brand">kind of builder</span>.
+              </>
+            }
+            lede="Whether you are starting with a question, building a company, or helping others move forward, there is a clear way to take part."
+          />
+        </Reveal>
 
         {/* Mobile swipe hint */}
         <p aria-hidden="true" className="chip-mono mt-8 lg:hidden">
@@ -111,7 +113,7 @@ export default function WhoShouldJoin() {
 
         <Reveal delay={2} className="mt-12 flex justify-center">
           <Button href="/register" variant="outline-dark">
-            Join the movement
+            Find your path
           </Button>
         </Reveal>
       </Container>

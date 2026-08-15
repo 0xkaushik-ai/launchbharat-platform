@@ -131,6 +131,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
   const [selectedId, setSelectedId] = useState<string>(
     firstActive ? firstActive.id : "",
   );
+  const [routePulse, setRoutePulse] = useState<{ key: number; d: string } | null>(null);
   const selected = cities.find((c) => c.id === selectedId) ?? firstActive;
 
   if (!selected) return null;
@@ -138,6 +139,15 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
   const { chainD, chainLength, cross } = buildLinks(cities);
   const hasPlanned = cities.some((c) => c.status === "planned");
   const labelOnLeft = selected.x > INDIA_VIEW.w * 0.62;
+
+  const selectCity = (next: NationCity) => {
+    if (next.id === selected.id) return;
+    setRoutePulse((current) => ({
+      key: (current?.key ?? 0) + 1,
+      d: `M ${selected.x} ${selected.y} L ${next.x} ${next.y}`,
+    }));
+    setSelectedId(next.id);
+  };
 
   const statRows: { label: string; value: number | null }[] = [
     { label: "Institutions", value: selected.institutions },
@@ -174,15 +184,29 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
             </g>
             {/* The tour chain — one elegant route, drawn in */}
             {chainD && (
+              <>
+                <path
+                  d={chainD}
+                  fill="none"
+                  className="animate-dash-draw stroke-[#ea7c0c]/30"
+                  strokeWidth={0.24}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeDasharray={chainLength}
+                  style={{ "--dash-length": chainLength } as CSSProperties}
+                />
+              </>
+            )}
+            {/* A one-time connection is drawn only when a new city is selected. */}
+            {routePulse && (
               <path
-                d={chainD}
+                key={routePulse.key}
+                d={routePulse.d}
                 fill="none"
-                className="animate-dash-draw stroke-[#ea7c0c]/30"
-                strokeWidth={0.24}
+                pathLength={100}
+                className="tour-route-pulse stroke-cyan-400"
+                strokeWidth={0.72}
                 strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeDasharray={chainLength}
-                style={{ "--dash-length": chainLength } as CSSProperties}
               />
             )}
             {/* City markers (clickable bonus — buttons below are the accessible path) */}
@@ -191,7 +215,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
               return (
                 <g
                   key={c.id}
-                  onClick={() => setSelectedId(c.id)}
+                  onClick={() => selectCity(c)}
                   className="cursor-pointer"
                 >
                   {/* generous invisible hit area */}
@@ -276,7 +300,7 @@ export default function NationMap({ cities }: { cities: NationCity[] }) {
                   key={c.id}
                   type="button"
                   aria-pressed={isSelected}
-                  onClick={() => setSelectedId(c.id)}
+                  onClick={() => selectCity(c)}
                   className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-1.5 font-mono text-[10px] font-medium tracking-[0.14em] whitespace-nowrap uppercase backdrop-blur transition duration-200 ${
                     isSelected
                       ? "border-iris-400 bg-white text-iris-600 shadow-[0_0_24px_-6px_rgba(234,124,12,0.6)]"

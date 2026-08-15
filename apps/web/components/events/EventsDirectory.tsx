@@ -3,7 +3,7 @@
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import type { LbEvent } from "@/lib/content";
 import EventCard from "./EventCard";
-import { createClient } from "@/lib/supabase-browser";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase-browser";
 
 type StatusFilter = "all" | "upcoming" | "completed";
 
@@ -32,10 +32,17 @@ export default function EventsDirectory({ events: initialEvents }: { events: LbE
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const isInitialMount = useRef(true);
-  const supabase = useMemo(() => createClient(), []);
+  const supabase = useMemo(
+    () => (isSupabaseConfigured() ? createClient() : null),
+    [],
+  );
   const PAGE_SIZE = 9;
 
   const fetchEvents = useCallback(async (pageNumber: number, reset: boolean) => {
+    if (!supabase) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     let query = supabase
       .from("events")

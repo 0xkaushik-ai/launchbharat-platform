@@ -17,7 +17,7 @@ export default function EventsPreview() {
       <Container className="relative">
         <SectionHeading
           id="events-preview-heading"
-          number="08"
+          number="06"
           eyebrow="Events"
           title={
             <>

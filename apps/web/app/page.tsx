@@ -1,9 +1,6 @@
 import Hero from "@/components/home/Hero";
-import Vision from "@/components/home/Vision";
 import ImpactStats from "@/components/home/ImpactStats";
-import Movement from "@/components/home/Movement";
 import Journey from "@/components/home/Journey";
-import EcosystemOrbit from "@/components/home/EcosystemOrbit";
 import NationMapSection from "@/components/home/NationMapSection";
 import WhyLaunchBharat from "@/components/home/WhyLaunchBharat";
 import WhoShouldJoin from "@/components/home/WhoShouldJoin";
@@ -12,7 +9,6 @@ import GrandFinale from "@/components/home/GrandFinale";
 import Mentors from "@/components/home/Mentors";
 import Partners from "@/components/home/Partners";
 import Stories from "@/components/home/Stories";
-import Trust from "@/components/home/Trust";
 import JoinCta from "@/components/home/JoinCta";
 import { getSite } from "@/lib/content";
 
@@ -35,20 +31,16 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       <Hero />
-      <Vision />
       <ImpactStats />
-      <Movement />
+      <WhoShouldJoin />
       <Journey />
-      <EcosystemOrbit />
       <NationMapSection />
       <WhyLaunchBharat />
-      <WhoShouldJoin />
       <EventsPreview />
       <GrandFinale />
       <Mentors />
       <Partners />
       <Stories />
-      <Trust />
       <JoinCta />
     </>
   );

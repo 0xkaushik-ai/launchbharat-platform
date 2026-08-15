@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { LogoMark, Button } from "@/components/ui";
-import { createClient } from "@/lib/supabase-browser";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase-browser";
 import type { NavItem } from "@/lib/content";
 import type { User } from "@supabase/supabase-js";
 
@@ -26,6 +26,8 @@ export default function Header({
   const pathname = usePathname();
   const router = useRouter();
   const accountRef = useRef<HTMLDivElement>(null);
+  const supabaseConfigured = isSupabaseConfigured();
+  const isHome = pathname === "/";
 
   const handleSignOut = async () => {
     const supabase = createClient();
@@ -36,18 +38,22 @@ export default function Header({
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const onScroll = () => {
+      const nextScrolled = window.scrollY > 16;
+      setScrolled((current) => (current === nextScrolled ? current : nextScrolled));
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
+    if (!supabaseConfigured) return;
     const supabase = createClient();
     void supabase.auth.getUser().then(({ data }) => setCurrentUser(data.user));
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => setCurrentUser(session?.user ?? null));
     return () => subscription.unsubscribe();
-  }, []);
+  }, [supabaseConfigured]);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -84,8 +90,10 @@ export default function Header({
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 pb-2">
-      <div className="hidden border-b border-white/70 bg-white/70 text-ink-600 backdrop-blur-xl sm:block">
+    <header className={`sticky top-0 z-50 pb-2 ${isHome ? "home-header" : ""}`}>
+      <div className={`hidden border-b border-white/70 bg-white/70 text-ink-600 backdrop-blur-xl sm:block ${
+        isHome ? "home-utility-bar" : ""
+      }`}>
         <div className="container-lb flex items-center justify-between py-1.5 text-[11px]">
           <p className="flex items-center gap-2 font-mono uppercase tracking-[0.18em] text-ink-500">
             <span className="h-1.5 w-1.5 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(56,189,248,0.75)]" aria-hidden="true" />
@@ -114,7 +122,7 @@ export default function Header({
         scrolled ? "pt-2" : "pt-3"
       }`}>
         <div className="container-lb !px-0">
-          <div className={`water-nav-panel flex items-center justify-between gap-3 px-3 transition-all duration-300 sm:px-4 lg:gap-5 lg:px-5 ${
+          <div className={`water-nav-panel flex items-center justify-between gap-3 px-3 transition-[padding,background-color,box-shadow,border-radius] duration-300 sm:px-4 lg:gap-5 lg:px-5 ${
             scrolled ? "water-nav-panel--scrolled py-1.5" : "py-2"
           }`}>
             <Link
@@ -215,7 +223,7 @@ export default function Header({
         </div>
       </div>
 
-      {announcement.enabled && (
+      {announcement.enabled && !isHome && (
         <div className="container-lb mt-2 text-center">
           <Link
             href={announcement.href}
