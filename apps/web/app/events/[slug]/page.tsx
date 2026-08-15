@@ -10,6 +10,10 @@ import {
 } from "@/components/events/EventCard";
 import { createClient } from "@/lib/supabase-server";
 
+// Admin-created events do not exist at build time. This route also reads the
+// Supabase session cookie, so every slug must render in a request context.
+export const dynamic = "force-dynamic";
+
 export function generateStaticParams() {
   return getEvents().map((event) => ({ slug: event.slug }));
 }
