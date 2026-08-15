@@ -62,6 +62,7 @@ export default function EventsDirectory({ events: initialEvents }: { events: LbE
       const mapped = (data as DatabaseEvent[]).map((e) => ({
         id: e.id,
         slug: e.slug,
+        managed: true,
         sample: false,
         title: e.title,
         city: e.city || e.venue,

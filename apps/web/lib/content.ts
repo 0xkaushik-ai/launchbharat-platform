@@ -93,6 +93,8 @@ export type EventStatus = "upcoming" | "completed";
 export interface LbEvent {
   id: string;
   slug: string;
+  /** True only when this event is backed by Supabase ticketing. */
+  managed?: boolean;
   sample: boolean;
   title: string;
   city: string;

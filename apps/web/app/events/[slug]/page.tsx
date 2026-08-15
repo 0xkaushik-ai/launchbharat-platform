@@ -80,7 +80,6 @@ export default async function EventDetailPage({
 }) {
   const { slug } = await params;
   let event = getEventBySlug(slug);
-  let isManagedEvent = false;
   
   // Fallback to database if not in static content
   if (!event) {
@@ -92,10 +91,10 @@ export default async function EventDetailPage({
       .single();
       
     if (dbEvent) {
-      isManagedEvent = true;
       event = {
         id: dbEvent.id,
         slug: dbEvent.slug,
+        managed: true,
         sample: false,
         title: dbEvent.title,
         city: dbEvent.city || dbEvent.venue,
@@ -277,7 +276,7 @@ export default async function EventDetailPage({
                   <div className="mt-7 border-t border-line pt-6">
                     {reg.open ? (
                       <Button
-                        href={isManagedEvent ? `/events/${event.slug}/register` : "/register"}
+                        href={`/events/${event.slug}/register`}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -289,6 +288,8 @@ export default async function EventDetailPage({
                       <p className="text-sm text-ink-600">
                         {event.status === "completed"
                           ? "This event has concluded."
+                          : event.registrationOpen && event.managed !== true
+                            ? "Online booking will open after this event is confirmed."
                           : "Registration opens soon."}
                       </p>
                     )}

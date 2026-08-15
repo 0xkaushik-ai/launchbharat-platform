@@ -51,11 +51,16 @@ export function registrationStatus(event: LbEvent): {
   open: boolean;
   label: string;
 } {
-  const open = event.registrationOpen && event.status === "upcoming";
+  const open =
+    event.managed === true &&
+    event.registrationOpen &&
+    event.status === "upcoming";
   const label = open
     ? "Registration open"
     : event.status === "completed"
       ? "Completed"
+      : event.registrationOpen && event.managed !== true
+        ? "Booking coming soon"
       : "Opens soon";
   return { open, label };
 }
@@ -178,7 +183,7 @@ export default function EventCard({
             <Button
               size="sm"
               variant="primary"
-              href={event.sample ? "/register" : `/events/${event.slug}/register`}
+              href={`/events/${event.slug}/register`}
               ariaLabel={`Register for ${event.title}`}
             >
               Register

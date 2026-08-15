@@ -44,6 +44,7 @@ export default async function EventsPage() {
   const mappedDbEvents = ((dbEvents || []) as DatabaseEvent[]).map((e) => ({
     id: e.id,
     slug: e.slug,
+    managed: true,
     sample: false,
     title: e.title,
     city: e.city || e.venue,
