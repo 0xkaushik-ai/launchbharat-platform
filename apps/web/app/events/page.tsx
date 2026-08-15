@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getEvents as getStaticEvents } from "@/lib/content";
 import { Container, Eyebrow } from "@/components/ui";
 import EventsDirectory from "@/components/events/EventsDirectory";
-import { createClient } from "@/lib/supabase-server";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase-server";
 
 type DatabaseEvent = {
   id: string;
@@ -30,12 +30,13 @@ export const metadata: Metadata = {
 export const revalidate = 0; // Don't cache since we pull from DB
 
 export default async function EventsPage() {
-  const supabase = await createClient();
-  const { data: dbEvents } = await supabase
-    .from("events")
-    .select("*")
-    .order("date_start", { ascending: true })
-    .limit(9);
+  const { data: dbEvents } = isSupabaseConfigured()
+    ? await (await createClient())
+        .from("events")
+        .select("*")
+        .order("date_start", { ascending: true })
+        .limit(9)
+    : { data: null };
 
   const staticEvents = getStaticEvents();
 

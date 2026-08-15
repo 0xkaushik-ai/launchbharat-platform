@@ -41,6 +41,14 @@ export default function RegisterPage() {
               One application places you inside a nationwide journey — from
               discovering your idea to standing on India&apos;s national stage.
             </p>
+            <div className="mt-6 flex flex-wrap items-center gap-2.5">
+              <span className="chip-mono border-green-200 bg-green-50/80 text-green-700">
+                Free to apply
+              </span>
+              <span className="text-sm text-ink-600">
+                Save your progress as you go
+              </span>
+            </div>
             <span aria-hidden="true" className="tricolor-rule mt-6 w-20" />
 
             {/* The journey, in miniature */}

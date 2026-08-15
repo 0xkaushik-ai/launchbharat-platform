@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui";
-import { createClient } from "@/lib/supabase-browser";
+import { createClient, isSupabaseConfigured } from "@/lib/supabase-browser";
 import type { User } from "@supabase/supabase-js";
 
 /* ——— Static form data ——— */
@@ -564,6 +564,10 @@ export default function RegistrationForm() {
 
   /* An application is always linked to a verified applicant account. */
   useEffect(() => {
+    if (!isSupabaseConfigured()) {
+      setAuthLoading(false);
+      return;
+    }
     const supabase = createClient();
     void supabase.auth.getUser().then(({ data: { user } }) => {
       setAccountUser(user);
@@ -667,6 +671,11 @@ export default function RegistrationForm() {
     event.preventDefault();
     setAuthSubmitting(true);
     setAuthError(null);
+    if (!isSupabaseConfigured()) {
+      setAuthError("Account access is temporarily unavailable. Please try again after Supabase is configured.");
+      setAuthSubmitting(false);
+      return;
+    }
     const supabase = createClient();
     const email = accountEmail.trim().toLowerCase();
 
@@ -731,6 +740,11 @@ export default function RegistrationForm() {
 
     setSubmitting(true);
     setSubmitError(null);
+    if (!isSupabaseConfigured()) {
+      setSubmitError("Applications are temporarily unavailable. Please try again after Supabase is configured.");
+      setSubmitting(false);
+      return;
+    }
     try {
       const payload = Object.fromEntries(
         Object.entries(values).map(([key, value]) => [

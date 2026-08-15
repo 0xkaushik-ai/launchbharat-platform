@@ -10,7 +10,7 @@ export default function Counter({
   value,
   placeholder,
   suffix = "",
-  duration = 1600,
+  duration = 650,
   className = "",
 }: {
   value: number | null;

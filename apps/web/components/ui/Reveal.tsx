@@ -13,11 +13,13 @@ export default function Reveal({
   delay = 0,
   className = "",
   as: Tag = "div",
+  variant = "reveal",
 }: {
   children: ReactNode;
   delay?: 0 | 1 | 2 | 3;
   className?: string;
   as?: ElementType;
+  variant?: "reveal" | "panel";
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -42,11 +44,13 @@ export default function Reveal({
     return () => io.disconnect();
   }, []);
 
-  const delayCls = delay > 0 ? ` reveal-delay-${delay}` : "";
+  const isPanel = variant === "panel";
+  const delayCls = !isPanel && delay > 0 ? ` reveal-delay-${delay}` : "";
   return (
     <Tag
       ref={ref}
-      className={`reveal${delayCls} ${visible ? "is-visible" : ""} ${className}`}
+      data-open={isPanel ? visible : undefined}
+      className={`${isPanel ? "t-panel-slide" : `reveal${delayCls} ${visible ? "is-visible" : ""}`} ${className}`}
     >
       {children}
     </Tag>
