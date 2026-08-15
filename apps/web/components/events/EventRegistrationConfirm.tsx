@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { createClient } from "@/lib/supabase-browser";
+import TicketQr from "@/components/tickets/TicketQr";
 
 type SavedDetails = {
   fullName: string;
@@ -48,10 +49,12 @@ function profileNeedsCompletion(profile: ProfileValues) {
 export default function EventRegistrationConfirm({
   eventId,
   eventTitle,
+  eventPricePaise,
   details,
 }: {
   eventId: string;
   eventTitle: string;
+  eventPricePaise: number;
   details: SavedDetails;
 }) {
   const [savedProfile, setSavedProfile] = useState(() =>
@@ -193,9 +196,14 @@ export default function EventRegistrationConfirm({
             : `Your ${eventTitle} ticket is now available in your applicant portal.`}
         </p>
         {result.ticketCode && (
-          <p className="mt-6 rounded-xl bg-slate-50 px-4 py-3 font-mono text-sm font-semibold tracking-wide text-ink-950">
-            Ticket {result.ticketCode}
-          </p>
+          <div className="mt-6 flex flex-col items-center gap-3 rounded-xl bg-slate-50 p-4 sm:flex-row sm:text-left">
+            <TicketQr ticketCode={result.ticketCode} size={132} />
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-wide text-ink-500">Your unique ticket</p>
+              <p className="mt-1 font-mono text-sm font-semibold tracking-wide text-ink-950">{result.ticketCode}</p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-500">Keep this QR ready for the admin to scan at entry.</p>
+            </div>
+          </div>
         )}
         <Link
           href="/portal"
@@ -330,6 +338,12 @@ export default function EventRegistrationConfirm({
       [savedProfile.city, savedProfile.state].filter(Boolean).join(", "),
     ],
     ["College / organisation", savedProfile.college || "Not added"],
+    [
+      "Ticket value",
+      eventPricePaise > 0
+        ? new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(eventPricePaise / 100)
+        : "Free",
+    ],
   ];
 
   return (
@@ -341,7 +355,7 @@ export default function EventRegistrationConfirm({
       <p className="mt-3 text-sm leading-relaxed text-ink-600">
         No application form is required. Review the details that will be used
         for <span className="font-semibold text-ink-800">{eventTitle}</span>,
-        then confirm your complimentary registration.
+        then confirm your registration.
       </p>
       <dl className="mt-7 divide-y divide-line rounded-xl border border-line">
         {rows.map(([label, value]) => (
@@ -354,6 +368,11 @@ export default function EventRegistrationConfirm({
           </div>
         ))}
       </dl>
+      {eventPricePaise > 0 && (
+        <p className="mt-3 text-xs leading-relaxed text-amber-700">
+          This records the event&apos;s booking value. Online payment collection is not enabled in this flow yet.
+        </p>
+      )}
       <button
         type="button"
         onClick={() => {
@@ -388,7 +407,7 @@ export default function EventRegistrationConfirm({
         onClick={register}
         className="mt-6 rounded-full btn-brand px-5 py-3 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {submitting ? "Confirming…" : "Confirm free registration"}
+        {submitting ? "Confirming…" : eventPricePaise > 0 ? "Confirm registration" : "Confirm free registration"}
       </button>
     </section>
   );

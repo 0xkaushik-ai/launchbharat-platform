@@ -20,7 +20,7 @@ type DatabaseEvent = {
   id: string; slug: string; title: string; city: string | null; state: string | null;
   venue: string; date_start: string; date_end: string | null; category: string;
   status: "upcoming" | "completed"; registration_open: boolean; summary: string;
-  description: string; highlights: string[];
+  description: string; highlights: string[]; ticket_price_paise: number;
 };
 
 export default function EventsDirectory({ events: initialEvents }: { events: LbEvent[] }) {
@@ -73,6 +73,7 @@ export default function EventsDirectory({ events: initialEvents }: { events: LbE
         category: e.category,
         status: e.status,
         registrationOpen: e.registration_open,
+        ticketPricePaise: e.ticket_price_paise,
         summary: e.summary || "",
         description: e.description || "",
         highlights: e.highlights || [],

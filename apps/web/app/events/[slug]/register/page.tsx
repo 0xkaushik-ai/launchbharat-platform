@@ -8,7 +8,7 @@ export default async function EventRegistrationPage({ params }: { params: Promis
   const supabase = await createClient();
   const { data: event } = await supabase
     .from("events")
-    .select("id, title, date_start, venue, city, state, is_published, registration_open, status")
+    .select("id, title, date_start, venue, city, state, ticket_price_paise, is_published, registration_open, status")
     .eq("slug", slug)
     .maybeSingle();
 
@@ -31,7 +31,7 @@ export default async function EventRegistrationPage({ params }: { params: Promis
         <h1 className="display-md mt-3 text-ink-950">{event.title}</h1>
         <p className="mt-3 text-sm text-ink-600">{new Intl.DateTimeFormat("en-IN", { dateStyle: "long" }).format(new Date(`${event.date_start}T00:00:00`))} · {event.venue}{event.city ? `, ${event.city}` : ""}</p>
         <div className="mt-8">
-          <EventRegistrationConfirm eventId={event.id} eventTitle={event.title} details={{
+          <EventRegistrationConfirm eventId={event.id} eventTitle={event.title} eventPricePaise={event.ticket_price_paise} details={{
             fullName: profile?.full_name?.trim() || user.user_metadata.full_name || "",
             email: user.email ?? profile?.email ?? "",
             mobile: profile?.mobile ?? null,

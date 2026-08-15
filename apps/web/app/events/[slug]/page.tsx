@@ -6,6 +6,7 @@ import { Badge, Button, Container } from "@/components/ui";
 import {
   datePlateParts,
   formatEventDates,
+  formatTicketPrice,
   registrationStatus,
 } from "@/components/events/EventCard";
 import { createClient } from "@/lib/supabase-server";
@@ -109,6 +110,7 @@ export default async function EventDetailPage({
         category: dbEvent.category,
         status: dbEvent.status,
         registrationOpen: dbEvent.registration_open,
+        ticketPricePaise: dbEvent.ticket_price_paise,
         summary: dbEvent.summary || "",
         description: dbEvent.description || "",
         highlights: dbEvent.highlights || [],
@@ -275,6 +277,16 @@ export default async function EventDetailPage({
                         </Badge>
                       </dd>
                     </div>
+                    {event.managed && (
+                      <div>
+                        <dt className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-400">
+                          Ticket value
+                        </dt>
+                        <dd className="mt-1 font-medium text-ink-800">
+                          {formatTicketPrice(event.ticketPricePaise)}
+                        </dd>
+                      </div>
+                    )}
                   </dl>
 
                   <div className="mt-7 border-t border-line pt-6">

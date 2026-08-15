@@ -105,6 +105,8 @@ export interface LbEvent {
   category: string;
   status: EventStatus;
   registrationOpen: boolean;
+  /** Configured booking value in paise. Undefined for static sample events. */
+  ticketPricePaise?: number;
   summary: string;
   description: string;
   highlights: string[];

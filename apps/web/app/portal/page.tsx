@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase-server";
+import TicketQr from "@/components/tickets/TicketQr";
 
 const STATUS: Record<string, { title: string; message: string; tone: string }> = {
   pending: { title: "Received", message: "Your application is safely with the LaunchBharat team. We will let you know when review begins.", tone: "bg-amber-100 text-amber-800" },
@@ -23,7 +24,7 @@ export default async function PortalPage() {
       .order("created_at", { ascending: false }),
     supabase
       .from("event_tickets")
-      .select("ticket_code, status, created_at, events(title, slug, date_start, venue), event_registrations(status)")
+      .select("ticket_code, status, price_paise, created_at, events(title, slug, date_start, venue), event_registrations(status)")
       .eq("user_id", user.id)
       .order("created_at", { ascending: false }),
   ]);
@@ -34,6 +35,7 @@ export default async function PortalPage() {
   const tickets = (ticketRows ?? []) as unknown as Array<{
     ticket_code: string;
     status: string;
+    price_paise: number;
     events: { title: string; slug: string; date_start: string; venue: string } | null;
   }>;
 
@@ -98,10 +100,25 @@ export default async function PortalPage() {
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {tickets.map((ticket) => (
               <article key={ticket.ticket_code} className="rounded-xl border border-line bg-mist p-5">
-                <p className="font-mono text-xs font-bold tracking-wide text-iris-600">{ticket.ticket_code}</p>
-                <h3 className="mt-2 font-semibold text-ink-950">{ticket.events?.title ?? "LaunchBharat event"}</h3>
-                {ticket.events && <p className="mt-1 text-sm text-ink-600">{new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(new Date(`${ticket.events.date_start}T00:00:00`))} · {ticket.events.venue}</p>}
-                <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-green-700">{ticket.status.replace("_", " ")}</p>
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+                  <div className="shrink-0 rounded-xl bg-white p-2 shadow-sm">
+                    <TicketQr ticketCode={ticket.ticket_code} size={148} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="font-mono text-xs font-bold tracking-wide text-iris-600">{ticket.ticket_code}</p>
+                    <h3 className="mt-2 font-semibold text-ink-950">{ticket.events?.title ?? "LaunchBharat event"}</h3>
+                    {ticket.events && <p className="mt-1 text-sm text-ink-600">{new Intl.DateTimeFormat("en-IN", { dateStyle: "medium" }).format(new Date(`${ticket.events.date_start}T00:00:00`))} · {ticket.events.venue}</p>}
+                    <p className="mt-2 text-sm font-semibold text-ink-800">
+                      {ticket.price_paise > 0
+                        ? new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 }).format(ticket.price_paise / 100)
+                        : "Free ticket"}
+                    </p>
+                    <p className={`mt-4 text-xs font-semibold uppercase tracking-wide ${ticket.status === "checked_in" ? "text-blue-700" : ticket.status === "cancelled" ? "text-red-700" : "text-green-700"}`}>
+                      {ticket.status.replace("_", " ")}
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-4 border-t border-line pt-3 text-xs leading-relaxed text-ink-500">Show this QR at the venue. A LaunchBharat admin will scan it once to verify your entry.</p>
               </article>
             ))}
           </div>

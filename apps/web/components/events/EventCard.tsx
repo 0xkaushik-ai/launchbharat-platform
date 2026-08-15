@@ -105,6 +105,15 @@ function BuildingIcon({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
+export function formatTicketPrice(paise: number | undefined): string {
+  if (!paise) return "Free";
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 2,
+  }).format(paise / 100);
+}
+
 /* ——— Card ——— */
 
 export default function EventCard({
@@ -141,6 +150,7 @@ export default function EventCard({
           <div className="flex flex-wrap justify-end gap-2">
             <Badge tone="iris">{event.category}</Badge>
             <Badge tone={reg.open ? "green" : "neutral"}>{reg.label}</Badge>
+            {event.managed && <Badge tone="neutral">{formatTicketPrice(event.ticketPricePaise)}</Badge>}
           </div>
         </div>
 

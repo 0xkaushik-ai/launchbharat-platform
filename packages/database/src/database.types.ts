@@ -204,6 +204,7 @@ export type Database = {
           created_at: string
           event_id: string
           id: string
+          price_paise: number
           registration_id: string
           status: Database["public"]["Enums"]["ticket_status"]
           ticket_code: string
@@ -216,6 +217,7 @@ export type Database = {
           created_at?: string
           event_id: string
           id?: string
+          price_paise?: number
           registration_id: string
           status?: Database["public"]["Enums"]["ticket_status"]
           ticket_code?: string
@@ -228,6 +230,7 @@ export type Database = {
           created_at?: string
           event_id?: string
           id?: string
+          price_paise?: number
           registration_id?: string
           status?: Database["public"]["Enums"]["ticket_status"]
           ticket_code?: string
@@ -270,6 +273,7 @@ export type Database = {
           state: string | null
           status: Database["public"]["Enums"]["event_status"]
           summary: string
+          ticket_price_paise: number
           title: string
           updated_at: string
           venue: string
@@ -292,6 +296,7 @@ export type Database = {
           state?: string | null
           status?: Database["public"]["Enums"]["event_status"]
           summary?: string
+          ticket_price_paise?: number
           title: string
           updated_at?: string
           venue: string
@@ -314,6 +319,7 @@ export type Database = {
           state?: string | null
           status?: Database["public"]["Enums"]["event_status"]
           summary?: string
+          ticket_price_paise?: number
           title?: string
           updated_at?: string
           venue?: string
@@ -439,6 +445,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      check_in_ticket: { Args: { p_ticket_code: string }; Returns: Json }
       has_role: {
         Args: { required_role: Database["public"]["Enums"]["app_role"] }
         Returns: boolean

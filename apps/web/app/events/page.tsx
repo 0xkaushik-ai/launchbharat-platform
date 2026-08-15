@@ -16,6 +16,7 @@ type DatabaseEvent = {
   category: string;
   status: "upcoming" | "completed";
   registration_open: boolean;
+  ticket_price_paise: number;
   summary: string;
   description: string;
   highlights: string[];
@@ -55,6 +56,7 @@ export default async function EventsPage() {
     category: e.category,
     status: e.status,
     registrationOpen: e.registration_open,
+    ticketPricePaise: e.ticket_price_paise,
     summary: e.summary || "",
     description: e.description || "",
     highlights: e.highlights || [],
